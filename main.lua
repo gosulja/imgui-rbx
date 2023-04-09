@@ -898,7 +898,7 @@ function main:Begin(PROPS)
             Radio_ElementItemName.Text = radio
             Radio_ElementItemName.TextColor3 = Color3.fromRGB(255, 255, 255)
             Radio_ElementItemName.TextSize = 17.000
-            Radio_ElementItemName.TextXAlignment = Enum.TextXAlignment.Lefts
+            Radio_ElementItemName.TextXAlignment = Enum.TextXAlignment.Left
 
             Radio_ElementLayout.Name = "Radio_ElementLayout"
             Radio_ElementLayout.Parent = Radio_Element
