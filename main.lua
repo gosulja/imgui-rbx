@@ -118,7 +118,7 @@ function main:Begin(PROPS)
     WindowDisplayName.BackgroundTransparency = 1.000
     WindowDisplayName.Position = UDim2.new(0.5, 0, 0.5, 0)
     WindowDisplayName.Size = UDim2.new(1, 0, 1, 0)
-    WindowDisplayName.FontFace = GetFont()
+    WindowDisplayName.FontFace = Font.fromId(12187362578)
     WindowDisplayName.Text = PROPS.Name
     WindowDisplayName.TextColor3 = Color3.fromRGB(225, 225, 225)
     WindowDisplayName.TextSize = 16.000
