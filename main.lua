@@ -119,7 +119,7 @@ function main:Begin(PROPS)
     WindowDisplayName.Position = UDim2.new(0.5, 0, 0.5, 0)
     WindowDisplayName.Size = UDim2.new(1, 0, 1, 0)
     WindowDisplayName.FontFace = GetFont()
-    WindowDisplayName.Text = MenuOptions.Name
+    WindowDisplayName.Text = PROPS.Name
     WindowDisplayName.TextColor3 = Color3.fromRGB(225, 225, 225)
     WindowDisplayName.TextSize = 16.000
     WindowDisplayName.TextXAlignment = Enum.TextXAlignment.Left
@@ -621,7 +621,7 @@ function main:Begin(PROPS)
         end
     end)
 
-    local ScrollableFrame = script.Parent
+    local ScrollableFrame = WindowElements
     
     -- Get the children of the ScrollableFrame
     local children = ScrollableFrame:GetChildren()
