@@ -10,11 +10,13 @@ Resizing feature (gyazo made it look buggy)
 
 ![](https://user-images.githubusercontent.com/111649405/230788331-c3af0e11-5ac7-4fdb-8a85-427b66f63232.gif)
 
+## Current Theme: Legacy (More will be added soon)
+
 # Progress
 
 | Element Type              | Added | Functional | Bugs (?)             |
 |---------------------------|-------|------------|----------------------|
-| Themes                    | false | false      | only default theme   |
+| Themes                    | false | false      | only legacy theme    |
 | Text / Label              | true  | true       | none                 |
 | Checkbox / Toggle         | true  | true       | none                 |
 | Slider/s (Integer, Float) | true  | semi       | numbers not rounding |
@@ -22,7 +24,7 @@ Resizing feature (gyazo made it look buggy)
 | Input Text                | true  | true       | none                 |
 | Plot Lines                | false | false      | none                 |
 | Menu Bar                  | false | false      | none                 |
-| Color Picker              | false | false      | none                 |
+| Color Picker              | true  | false      | logic not added yet  |
 | Text Colored              | false | false      | none                 |
 
 

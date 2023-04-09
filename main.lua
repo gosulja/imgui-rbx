@@ -659,6 +659,206 @@ function main:Begin(PROPS)
         Seperator_Element.Size = UDim2.new(1, 0, 0, 1)
     end
 
+    function ElementHandler:ColorPicker3(ColorPickerArgs) 
+        local Color_Element = Instance.new("Frame")
+        local Color_ElementLayout = Instance.new("UIListLayout")
+        local Color_ElementRed = Instance.new("Frame")
+        local Color_ElementRedTextInput = Instance.new("TextBox")
+        local Color_ElementRedButtonInput = Instance.new("TextButton")
+        local Color_ElementGreen = Instance.new("Frame")
+        local Color_ElementGreenTextInput = Instance.new("TextBox")
+        local Color_ElementGreenButtonInput = Instance.new("TextButton")
+        local Color_ElementBlue = Instance.new("Frame")
+        local Color_ElementBlueTextInput = Instance.new("TextBox")
+        local Color_ElementBlueButtonInput = Instance.new("TextButton")
+        local Color_ElementDisplay = Instance.new("Frame")
+        local Color_ElementName = Instance.new("TextLabel")
+
+        local ColorPickerName = ColorPickerArgs.Name
+
+        Color_Element.Name = "Color_Element"
+        Color_Element.Parent = WindowElements
+        Color_Element.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        Color_Element.BackgroundTransparency = 1.000
+        Color_Element.Position = UDim2.new(0, 0, 0.49666667, 0)
+        Color_Element.Size = UDim2.new(1, 0, 0, 23)
+
+        Color_ElementLayout.Name = "Color_ElementLayout"
+        Color_ElementLayout.Parent = Color_Element
+        Color_ElementLayout.FillDirection = Enum.FillDirection.Horizontal
+        Color_ElementLayout.SortOrder = Enum.SortOrder.LayoutOrder
+        Color_ElementLayout.Padding = UDim.new(0, 7)
+
+        Color_ElementRed.Name = "Color_ElementRed"
+        Color_ElementRed.Parent = Color_Element
+        Color_ElementRed.BackgroundColor3 = Color3.fromRGB(41, 74, 122)
+        Color_ElementRed.BorderColor3 = Color3.fromRGB(74, 74, 83)
+        Color_ElementRed.Size = UDim2.new(0, 60, 1, 0)
+
+        Color_ElementRedTextInput.Name = "Color_ElementRedTextInput"
+        Color_ElementRedTextInput.Parent = Color_ElementRed
+        Color_ElementRedTextInput.AnchorPoint = Vector2.new(0.5, 0.5)
+        Color_ElementRedTextInput.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        Color_ElementRedTextInput.BackgroundTransparency = 1.000
+        Color_ElementRedTextInput.Position = UDim2.new(0.5, 0, 0.5, 0)
+        Color_ElementRedTextInput.Size = UDim2.new(0, 25, 1, 0)
+        Color_ElementRedTextInput.FontFace = GetFont()
+        Color_ElementRedTextInput.PlaceholderColor3 = Color3.fromRGB(255, 255, 255)
+        Color_ElementRedTextInput.PlaceholderText = "R:255"
+        Color_ElementRedTextInput.Text = "R:255"
+        Color_ElementRedTextInput.TextColor3 = Color3.fromRGB(255, 255, 255)
+        Color_ElementRedTextInput.TextSize = 17.000
+
+        Color_ElementRedButtonInput.Name = "Color_ElementRedButtonInput"
+        Color_ElementRedButtonInput.Parent = Color_ElementRed
+        Color_ElementRedButtonInput.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        Color_ElementRedButtonInput.BackgroundTransparency = 1.000
+        Color_ElementRedButtonInput.Size = UDim2.new(1, 0, 1, 0)
+        Color_ElementRedButtonInput.FontFace = GetFont()
+        Color_ElementRedButtonInput.Text = ""
+        Color_ElementRedButtonInput.TextColor3 = Color3.fromRGB(0, 0, 0)
+        Color_ElementRedButtonInput.TextSize = 14.000
+
+        Color_ElementGreen.Name = "Color_ElementGreen"
+        Color_ElementGreen.Parent = Color_Element
+        Color_ElementGreen.BackgroundColor3 = Color3.fromRGB(41, 74, 122)
+        Color_ElementGreen.BorderColor3 = Color3.fromRGB(74, 74, 83)
+        Color_ElementGreen.Size = UDim2.new(0, 60, 1, 0)
+
+        Color_ElementGreenTextInput.Name = "Color_ElementGreenTextInput"
+        Color_ElementGreenTextInput.Parent = Color_ElementGreen
+        Color_ElementGreenTextInput.AnchorPoint = Vector2.new(0.5, 0.5)
+        Color_ElementGreenTextInput.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        Color_ElementGreenTextInput.BackgroundTransparency = 1.000
+        Color_ElementGreenTextInput.Position = UDim2.new(0.5, 0, 0.5, 0)
+        Color_ElementGreenTextInput.Size = UDim2.new(0, 25, 1, 0)
+        Color_ElementGreenTextInput.FontFace = GetFont()
+        Color_ElementGreenTextInput.PlaceholderColor3 = Color3.fromRGB(255, 255, 255)
+        Color_ElementGreenTextInput.PlaceholderText = "G:255"
+        Color_ElementGreenTextInput.Text = "G:255"
+        Color_ElementGreenTextInput.TextColor3 = Color3.fromRGB(255, 255, 255)
+        Color_ElementGreenTextInput.TextSize = 17.000
+
+        Color_ElementGreenButtonInput.Name = "Color_ElementGreenButtonInput"
+        Color_ElementGreenButtonInput.Parent = Color_ElementGreen
+        Color_ElementGreenButtonInput.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        Color_ElementGreenButtonInput.BackgroundTransparency = 1.000
+        Color_ElementGreenButtonInput.Size = UDim2.new(1, 0, 1, 0)
+        Color_ElementGreenButtonInput.FontFace = GetFont()
+        Color_ElementGreenButtonInput.Text = ""
+        Color_ElementGreenButtonInput.TextColor3 = Color3.fromRGB(0, 0, 0)
+        Color_ElementGreenButtonInput.TextSize = 14.000
+
+        Color_ElementBlue.Name = "Color_ElementBlue"
+        Color_ElementBlue.Parent = Color_Element
+        Color_ElementBlue.BackgroundColor3 = Color3.fromRGB(41, 74, 122)
+        Color_ElementBlue.BorderColor3 = Color3.fromRGB(74, 74, 83)
+        Color_ElementBlue.Size = UDim2.new(0, 60, 1, 0)
+
+        Color_ElementBlueTextInput.Name = "Color_ElementBlueTextInput"
+        Color_ElementBlueTextInput.Parent = Color_ElementBlue
+        Color_ElementBlueTextInput.AnchorPoint = Vector2.new(0.5, 0.5)
+        Color_ElementBlueTextInput.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        Color_ElementBlueTextInput.BackgroundTransparency = 1.000
+        Color_ElementBlueTextInput.Position = UDim2.new(0.5, 0, 0.5, 0)
+        Color_ElementBlueTextInput.Size = UDim2.new(0, 25, 1, 0)
+        Color_ElementBlueTextInput.FontFace = GetFont()
+        Color_ElementBlueTextInput.PlaceholderColor3 = Color3.fromRGB(255, 255, 255)
+        Color_ElementBlueTextInput.PlaceholderText = "B:255"
+        Color_ElementBlueTextInput.Text = "B:255"
+        Color_ElementBlueTextInput.TextColor3 = Color3.fromRGB(255, 255, 255)
+        Color_ElementBlueTextInput.TextSize = 17.000
+
+        Color_ElementBlueButtonInput.Name = "Color_ElementBlueButtonInput"
+        Color_ElementBlueButtonInput.Parent = Color_ElementBlue
+        Color_ElementBlueButtonInput.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        Color_ElementBlueButtonInput.BackgroundTransparency = 1.000
+        Color_ElementBlueButtonInput.Size = UDim2.new(1, 0, 1, 0)
+        Color_ElementBlueButtonInput.FontFace = GetFont()
+        Color_ElementBlueButtonInput.Text = ""
+        Color_ElementBlueButtonInput.TextColor3 = Color3.fromRGB(0, 0, 0)
+        Color_ElementBlueButtonInput.TextSize = 14.000
+
+        Color_ElementDisplay.Name = "Color_ElementDisplay"
+        Color_ElementDisplay.Parent = Color_Element
+        Color_ElementDisplay.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        Color_ElementDisplay.BorderColor3 = Color3.fromRGB(74, 74, 83)
+        Color_ElementDisplay.Size = UDim2.new(0, 23, 0, 23)
+
+        Color_ElementName.Name = "Color_ElementName"
+        Color_ElementName.Parent = Color_Element
+        Color_ElementName.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        Color_ElementName.BackgroundTransparency = 1.000
+        Color_ElementName.Position = UDim2.new(2.21000075, 0, 0, 0)
+        Color_ElementName.Size = UDim2.new(1, 0, 0, 23)
+        Color_ElementName.FontFace = GetFont()
+        Color_ElementName.Text = ColorPickerName
+        Color_ElementName.TextColor3 = Color3.fromRGB(255, 255, 255)
+        Color_ElementName.TextSize = 17.000
+        Color_ElementName.TextXAlignment = Enum.TextXAlignment.Left
+
+        local UIS = game:GetService("UserInputService")
+        local Dragging = false
+        local CurrentColor = Color3.fromRGB(255, 255, 255) or ColorPickerArgs.DefaultColor
+
+        Color_ElementDisplay.BackgroundColor3 = CurrentColor
+
+        local redDown, greenDown, blueDown = false, false, false
+
+        Color_ElementRedButtonInput.MouseButton1Down:Connect(function()
+            redDown = true
+        end)
+
+        Color_ElementGreenButtonInput.MouseButton1Down:Connect(function()
+            greenDown = true
+        end)
+
+        Color_ElementBlueButtonInput.MouseButton1Down:Connect(function()
+            blueDown = true
+        end)
+
+        Color_ElementRedButtonInput.MouseButton1Up:Connect(function()
+            redDown = false
+        end)
+
+        Color_ElementGreenButtonInput.MouseButton1Up:Connect(function()
+            greenDown = false
+        end)
+
+        Color_ElementBlueButtonInput.MouseButton1Up:Connect(function()
+            blueDown = false
+        end)
+
+        UIS.InputChanged:Connect(function(input, gameProcessedEvent)
+            if redDown and input.UserInputType == Enum.UserInputType.MouseMovement then
+                local colorVector = Vector3.new(input.Position.X, input.Position.Y, 0)
+                local colorValue = Color3.fromHSV(colorVector.X / Color_ElementRedButtonInput.AbsoluteSize.X, 1, 1)
+                CurrentColor.R = colorValue
+
+                Color_ElementDisplay.BackgroundColor3 = CurrentColor
+                pcall(ColorPickerArgs.OnChanged, CurrentColor)
+            end
+
+            if greenDown and input.UserInputType == Enum.UserInputType.MouseMovement then
+                local colorVector = Vector3.new(input.Position.X, input.Position.Y, 0)
+                local colorValue = Color3.fromHSV(colorVector.X / Color_ElementGreenButtonInput.AbsoluteSize.X, 1, 1)
+                CurrentColor.G = colorValue
+
+                Color_ElementDisplay.BackgroundColor3 = CurrentColor
+                pcall(ColorPickerArgs.OnChanged, CurrentColor)
+            end
+
+            if blueDown and input.UserInputType == Enum.UserInputType.MouseMovement then
+                local colorVector = Vector3.new(input.Position.X, input.Position.Y, 0)
+                local colorValue = Color3.fromHSV(colorVector.X / Color_ElementBlueButtonInput.AbsoluteSize.X, 1, 1)
+                CurrentColor.B = colorValue
+
+                Color_ElementDisplay.BackgroundColor3 = CurrentColor
+                pcall(ColorPickerArgs.OnChanged, CurrentColor)
+            end
+        end)
+    end
+
     -- Handle the resize feature
     local TweenService = game:GetService("TweenService")
     local UserInputService = game:GetService("UserInputService")
