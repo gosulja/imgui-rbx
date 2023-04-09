@@ -825,15 +825,15 @@ function main:Begin(PROPS)
 
                         if color == "R" then
                             R = value
-
+                            colorButton.Text = string.format("R:%s", value);
                             updateColor()
                         elseif color == "G" then
                             G = value
-
+                            colorButton.Text = string.format("G:%s", value);
                             updateColor()
                         elseif color == "B" then
                             B = value
-
+                            colorButton.Text = string.format("B:%s", value);
                             updateColor()
                         end
 
