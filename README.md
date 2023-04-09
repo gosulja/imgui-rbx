@@ -6,7 +6,10 @@ A Dear ImGui clone for roblox.
 ![Example](https://cdn.discordapp.com/attachments/1089941257117257731/1094674670030172290/image.png)
 
 Resizing feature (gyazo made it look buggy)
-![Video here](https://gyazo.com/ee2e97b4038d0e120ca4a217bfe9de4f)
+
+
+![](https://user-images.githubusercontent.com/111649405/230788331-c3af0e11-5ac7-4fdb-8a85-427b66f63232.gif)
+
 
 # Documentation
 ```lua
