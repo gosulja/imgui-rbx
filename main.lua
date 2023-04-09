@@ -292,6 +292,8 @@ function main:Begin(PROPS)
                 pcall(InputTextOptions.Callback, TextBox_ElementInput.Text)
             end
         end)
+                
+        
     end
 
     function ElementHandler:SliderFloat(SliderOptions) 
