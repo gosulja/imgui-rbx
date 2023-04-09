@@ -14,6 +14,7 @@ Resizing feature (gyazo made it look buggy)
 
 | Element Type              | Added | Functional | Bugs (?)             |
 |---------------------------|-------|------------|----------------------|
+| Themes                    | false | false      | only default theme   |
 | Text / Label              | true  | true       | none                 |
 | Checkbox / Toggle         | true  | true       | none                 |
 | Slider/s (Integer, Float) | true  | semi       | numbers not rounding |
