@@ -851,9 +851,6 @@ function main:Begin(PROPS)
     end
 
     function ElementHandler:RadioButtons(RadioButtonsArgs) 
-        local SelectedButton = nil
-        local RadioButtons = {}
-
         local Radio_Element = Instance.new("Frame")
         local Radio_ElementLayout = Instance.new("UIListLayout")
 
@@ -871,6 +868,9 @@ function main:Begin(PROPS)
         Radio_ElementLayout.Padding = UDim.new(0, 7)
 
         local Default = RadioButtonsArgs.Default
+
+        local SelectedButton = nil
+        local RadioButtons = {}
 
         for i, radio in pairs(RadioButtonsArgs.Buttons) do 
             local Radio_ElementItem = Instance.new("Frame")
@@ -941,43 +941,42 @@ function main:Begin(PROPS)
             Radio_ElementItemName.TextSize = 14.000
             Radio_ElementItemName.TextXAlignment = Enum.TextXAlignment.Left
 
-            -- Function to change the selected radio button
-            local function ChangeSelection()
-                if not RadioEnabled then
-                    RadioEnabled = true
-                    Radio_ElementItemButtonState.BackgroundColor3 = Color3.fromRGB(114, 137, 218)
-                    radio.Selected = true
-                    for _, otherRadio in pairs(RadioButtonsArgs.Buttons) do
-                        if otherRadio ~= radio then
-                            otherRadio.Selected = false
-                            otherRadio.Element.Radio_ElementItem.Radio_ElementItemButton.Radio_ElementItemRadio_ElementItemButton.Radio_ElementItemButtonState.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-                        end
-                    end
-                end
-            end
-                        
-            -- Connect the radio button to the change selection function
-            Radio_ElementItemButtonInput.MouseButton1Click:Connect(function()
-                ChangeSelection()
-            end)
-            
-            -- Set up the initial state of the radio button
-            if radio.Selected then
+            if radio == Default then 
                 RadioEnabled = true
-                Radio_ElementItemButtonState.BackgroundColor3 = Color3.fromRGB(114, 137, 218)
             else
                 RadioEnabled = false
-                Radio_ElementItemButtonState.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
             end
-            
-            -- Add the radio button to the radio group
-            radio.Element = Radio_ElementItem
-            
-            -- Add the radio button to the UIListLayout
-            Radio_ElementItemLayout:AddChild(Radio_ElementItem)
-            
-            -- Add the radio button to the table of radio buttons
-            table.insert(RadioButtons, radio)
+
+            local radioButton = {
+                Name = radio,
+                Enabled = RadioEnabled,
+                Update = nil
+            }
+
+            radioButton.Update = function() 
+                if radioButton.Enabled then
+                    Radio_ElementItemButtonState.Visible = true;
+                else
+                    Radio_ElementItemButtonState.Visible = false;
+                end
+            end
+
+            Radio_ElementItemButtonInput.MouseButton1Click:Connect(function()
+                for _, rad in pairs(RadioButtons) do 
+                    if not rad.Name == radio and not radioButton.Enabled then
+                        radioButton.Enabled = true
+                        radioButton.Update()
+                        rad.Enabled = false
+                        rad.Update()
+                    elseif rad.Name == radio and radioButton.Enabled then
+                        radioButton.Enabled = false
+                        rad.Enabled = false
+                        rad.Update()
+                    end
+                end
+            end)
+
+            table.insert(RadioButtons, radioButton)
         end
         
     end
