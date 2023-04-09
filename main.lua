@@ -798,7 +798,7 @@ function main:Begin(PROPS)
         Color_ElementName.TextXAlignment = Enum.TextXAlignment.Left
 
         local UIS = game:GetService("UserInputService")
-        local CurrentColor = Color3.fromRGB(255, 255, 255)
+        local CurrentColor = ColorPickerArgs.DefaultColor or Color3.fromRGB(255, 255, 255)
 
         local function setColor()
             Color_ElementDisplay.BackgroundColor3 = CurrentColor
@@ -811,7 +811,7 @@ function main:Begin(PROPS)
                 Color_ElementRedTextInput.Text = string.format("R:%s", value);
             elseif color == "G" then
                 CurrentColor = Color3.fromRGB(CurrentColor.R, value, CurrentColor.B)
-                Color_ElementBlueTextInput.Text = string.format("B:%s", value);
+                Color_ElementGreenTextInput.Text = string.format("G:%s", value);
             elseif color == "B" then
                 CurrentColor = Color3.fromRGB(CurrentColor.R, CurrentColor.G, value)
                 Color_ElementBlueTextInput.Text = string.format("B:%s", value);
@@ -834,6 +834,7 @@ function main:Begin(PROPS)
                 end)
             end
         end
+
 
     end
 
