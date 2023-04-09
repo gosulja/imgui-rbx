@@ -1,7 +1,7 @@
 local ImGui = loadstring(game:HttpGet("https://raw.githubusercontent.com/wiIlow/imgui-rbx/main/main.lua", true))()
 
 local Window = ImGui:Begin({
-    Name = "imgui-rbx colorpicker test",
+    Name = "imgui-rbx colorpicker3",
     Width = 500,
     Height = 350
 })

@@ -21,10 +21,10 @@ Resizing feature (gyazo made it look buggy)
 | Checkbox / Toggle         | true  | true       | none                 |
 | Slider/s (Integer, Float) | true  | semi       | none                 |
 | Seperator                 | true  | true       | none                 |
+| Color Picker              | true  | true       | added logic, fixings |
 | Input Text                | true  | true       | none                 |
 | Plot Lines                | false | false      | none                 |
 | Menu Bar                  | false | false      | none                 |
-| Color Picker              | true  | false      | added logic, fixings |
 | Text Colored              | false | false      | none                 |
 
 
