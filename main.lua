@@ -1,7 +1,7 @@
 local main = {}
 
 function main:Begin(PROPS) 
-    if not type(PROPS) == "table" then 
+    if not PROPS then 
         return
     end
 
