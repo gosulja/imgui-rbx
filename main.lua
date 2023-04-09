@@ -332,9 +332,9 @@ function main:Begin(PROPS)
         Slider_ElementValue.BackgroundTransparency = 1.000
         Slider_ElementValue.Position = UDim2.new(0.5, 0, 0.5, 0)
         Slider_ElementValue.Size = UDim2.new(1, 0, 1, 0)
-        Slider_ElementValue.Font = Enum.Font.Unknown
+        Slider_ElementValue.FontFace = GetFont()
         Slider_ElementValue.LineHeight = 0.930
-        Slider_ElementValue.Text = "0.600"
+        Slider_ElementValue.Text = SliderOptions.Default
         Slider_ElementValue.TextColor3 = Color3.fromRGB(217, 217, 217)
         Slider_ElementValue.TextSize = 17.000
 
@@ -343,7 +343,7 @@ function main:Begin(PROPS)
         Slider_ElementOnInput.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
         Slider_ElementOnInput.BackgroundTransparency = 1.000
         Slider_ElementOnInput.Size = UDim2.new(1, 0, 1, 0)
-        Slider_ElementOnInput.Font = Enum.Font.SourceSans
+        Slider_ElementOnInput.FontFace = GetFont()
         Slider_ElementOnInput.Text = ""
         Slider_ElementOnInput.TextColor3 = Color3.fromRGB(0, 0, 0)
         Slider_ElementOnInput.TextSize = 14.000
@@ -354,8 +354,8 @@ function main:Begin(PROPS)
         Slider_ElementName.BackgroundTransparency = 1.000
         Slider_ElementName.Position = UDim2.new(2.21000004, 0, 0, 0)
         Slider_ElementName.Size = UDim2.new(1, 0, 0.0299999993, 20)
-        Slider_ElementName.Font = Enum.Font.Unknown
-        Slider_ElementName.Text = "float"
+        Slider_ElementName.FontFace = GetFont()
+        Slider_ElementName.Text = SliderOptions.Name
         Slider_ElementName.TextColor3 = Color3.fromRGB(255, 255, 255)
         Slider_ElementName.TextSize = 17.000
         Slider_ElementName.TextXAlignment = Enum.TextXAlignment.Left
@@ -370,6 +370,138 @@ function main:Begin(PROPS)
         local minValue = SliderOptions.Min
         local maxValue = SliderOptions.Max
         local decimalPlaces = 3
+        local defaultValue = SliderOptions.Default
+
+        local function updateSlider(input)
+            local sliderWidth = Slider_ElementOnInput.AbsoluteSize.X - 10
+            local sliderPosition = math.clamp(input.Position.X - (Slider_ElementOnInput.AbsolutePosition.X + 5), 0, sliderWidth) / sliderWidth
+            local sliderValue = minValue + (maxValue - minValue) * sliderPosition
+
+            -- Check if the slider selector has reached the start of the slider
+            if sliderPosition <= 0 then
+                sliderPosition = 0
+                sliderValue = minValue
+                -- Check if the slider selector has reached the end of the slider
+            elseif sliderPosition >= 1 then
+                sliderPosition = 1
+                sliderValue = maxValue
+            else
+                -- The slider is in the middle of the track, so update the slider value accordingly
+                sliderValue = minValue + (maxValue - minValue) * sliderPosition
+            end
+
+            Slider_ElementValue.Text = string.format("%."..decimalPlaces.."f", sliderValue)
+            Slider_ElementSelector.Position = UDim2.new(sliderPosition, 0, 0.5, 0)
+
+            pcall(SliderOptions.OnChanged, sliderValue)
+        end
+
+        local function setSliderValue(value)
+            value = math.clamp(value, minValue, maxValue)
+            local sliderPosition = (value - minValue) / (maxValue - minValue)
+            Slider_ElementValue.Text = string.format("%."..decimalPlaces.."f", value)
+            Slider_ElementSelector.Position = UDim2.new(sliderPosition, 0, 0.5, 0)
+        end
+
+        setSliderValue(defaultValue)
+
+        local dragging = false
+
+        Slider_ElementOnInput.MouseButton1Down:Connect(function()
+            dragging = true
+        end)
+
+        Slider_ElementOnInput.MouseButton1Up:Connect(function()
+            dragging = false
+        end)
+
+        Slider_ElementFrame.MouseLeave:Connect(function() 
+            dragging = false
+        end)
+
+        UserInputService.InputChanged:Connect(function(input)
+            if input.UserInputType == Enum.UserInputType.MouseMovement and dragging then
+                updateSlider(input)
+            end
+        end)
+    end
+
+    function ElementHandler:SliderInteger(SliderOptions) 
+        local Slider_Element = Instance.new("Frame")
+        local Slider_ElementFrame = Instance.new("Frame")
+        local Slider_ElementSelector = Instance.new("Frame")
+        local Slider_ElementValue = Instance.new("TextLabel")
+        local Slider_ElementOnInput = Instance.new("TextButton")
+        local Slider_ElementName = Instance.new("TextLabel")
+        local Slider_ElementLayout = Instance.new("UIListLayout")
+
+        Slider_Element.Name = "Slider_Element"
+        Slider_Element.Parent = WindowElements
+        Slider_Element.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        Slider_Element.BackgroundTransparency = 1.000
+        Slider_Element.Size = UDim2.new(1, 0, 0, 23)
+
+        Slider_ElementFrame.Name = "Slider_ElementFrame"
+        Slider_ElementFrame.Parent = Slider_Element
+        Slider_ElementFrame.BackgroundColor3 = Color3.fromRGB(41, 74, 122)
+        Slider_ElementFrame.BorderColor3 = Color3.fromRGB(74, 74, 83)
+        Slider_ElementFrame.ClipsDescendants = true
+        Slider_ElementFrame.Size = UDim2.new(0.300000012, 0, -3.34800005, 100)
+
+        Slider_ElementSelector.Name = "Slider_ElementSelector"
+        Slider_ElementSelector.Parent = Slider_ElementFrame
+        Slider_ElementSelector.AnchorPoint = Vector2.new(0.5, 0.5)
+        Slider_ElementSelector.BackgroundColor3 = Color3.fromRGB(70, 128, 209)
+        Slider_ElementSelector.BackgroundTransparency = 0.150
+        Slider_ElementSelector.BorderSizePixel = 0
+        Slider_ElementSelector.Position = UDim2.new(0, 10, 0.5, 0)
+        Slider_ElementSelector.Size = UDim2.new(0, 13, 0, 21)
+
+        Slider_ElementValue.Name = "Slider_ElementValue"
+        Slider_ElementValue.Parent = Slider_ElementFrame
+        Slider_ElementValue.AnchorPoint = Vector2.new(0.5, 0.5)
+        Slider_ElementValue.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        Slider_ElementValue.BackgroundTransparency = 1.000
+        Slider_ElementValue.Position = UDim2.new(0.5, 0, 0.5, 0)
+        Slider_ElementValue.Size = UDim2.new(1, 0, 1, 0)
+        Slider_ElementValue.FontFace = GetFont()
+        Slider_ElementValue.LineHeight = 0.930
+        Slider_ElementValue.Text = SliderOptions.Default
+        Slider_ElementValue.TextColor3 = Color3.fromRGB(217, 217, 217)
+        Slider_ElementValue.TextSize = 17.000
+
+        Slider_ElementOnInput.Name = "Slider_ElementOnInput"
+        Slider_ElementOnInput.Parent = Slider_ElementFrame
+        Slider_ElementOnInput.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        Slider_ElementOnInput.BackgroundTransparency = 1.000
+        Slider_ElementOnInput.Size = UDim2.new(1, 0, 1, 0)
+        Slider_ElementOnInput.FontFace = GetFont()
+        Slider_ElementOnInput.Text = ""
+        Slider_ElementOnInput.TextColor3 = Color3.fromRGB(0, 0, 0)
+        Slider_ElementOnInput.TextSize = 14.000
+
+        Slider_ElementName.Name = "Slider_ElementName"
+        Slider_ElementName.Parent = Slider_Element
+        Slider_ElementName.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        Slider_ElementName.BackgroundTransparency = 1.000
+        Slider_ElementName.Position = UDim2.new(2.21000004, 0, 0, 0)
+        Slider_ElementName.Size = UDim2.new(1, 0, 0.0299999993, 20)
+        Slider_ElementName.FontFace = GetFont()
+        Slider_ElementName.Text = SliderOptions.Name
+        Slider_ElementName.TextColor3 = Color3.fromRGB(255, 255, 255)
+        Slider_ElementName.TextSize = 17.000
+        Slider_ElementName.TextXAlignment = Enum.TextXAlignment.Left
+
+        Slider_ElementLayout.Name = "Slider_ElementLayout"
+        Slider_ElementLayout.Parent = Slider_Element
+        Slider_ElementLayout.FillDirection = Enum.FillDirection.Horizontal
+        Slider_ElementLayout.Padding = UDim.new(0, 7)
+
+        local UserInputService = game:GetService("UserInputService")
+
+        local minValue = SliderOptions.Min
+        local maxValue = SliderOptions.Max
+        local decimalPlaces = 0
         local defaultValue = SliderOptions.Default
 
         local function updateSlider(input)
@@ -480,7 +612,7 @@ function main:Begin(PROPS)
         CheckBox_ElementName.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
         CheckBox_ElementName.BackgroundTransparency = 1.000
         CheckBox_ElementName.Size = UDim2.new(1, 0, 0, 20)
-        CheckBox_ElementName.Font = Enum.Font.Unknown
+        CheckBox_ElementName.FontFace = GetFont()
         CheckBox_ElementName.Text = CheckBoxOptions.Name
         CheckBox_ElementName.TextColor3 = Color3.fromRGB(255, 255, 255)
         CheckBox_ElementName.TextSize = 17.000
