@@ -800,22 +800,16 @@ function main:Begin(PROPS)
         local UIS = game:GetService("UserInputService")
         local CurrentColor = ColorPickerArgs.DefaultColor or Color3.fromRGB(255, 255, 255)
 
+        local R, G, B = 0, 0, 0;
+
         local function setColor()
             Color_ElementDisplay.BackgroundColor3 = CurrentColor
             pcall(ColorPickerArgs.OnChanged, CurrentColor)
         end
 
-        local function updateColor(color, value)
-            if color == "R" then
-                CurrentColor = Color3.fromRGB(value, CurrentColor.G, CurrentColor.B)
-                Color_ElementRedTextInput.Text = string.format("R:%s", value);
-            elseif color == "G" then
-                CurrentColor = Color3.fromRGB(CurrentColor.R, value, CurrentColor.B)
-                Color_ElementGreenTextInput.Text = string.format("G:%s", value);
-            elseif color == "B" then
-                CurrentColor = Color3.fromRGB(CurrentColor.R, CurrentColor.G, value)
-                Color_ElementBlueTextInput.Text = string.format("B:%s", value);
-            end
+        local function updateColor()
+            CurrentColor = Color3.fromRGB(R, G, B)
+
             setColor()
         end
 
@@ -828,7 +822,21 @@ function main:Begin(PROPS)
                         local x = math.clamp(UIS:GetMouseLocation().X - colorButton.AbsolutePosition.X, 0, colorButton.AbsoluteSize.X)
                         local value = math.floor(x / colorButton.AbsoluteSize.X * 255 + 0.5)
                         local color = string.sub(colorButton.Name, 14, 14)
-                        updateColor(color, value)
+
+                        if color == "R" then
+                            R = value
+
+                            updateColor()
+                        elseif color == "G" then
+                            G = value
+
+                            updateColor()
+                        elseif color == "B" then
+                            B = value
+
+                            updateColor()
+                        end
+
                         task.wait()
                     end
                 end)
