@@ -903,6 +903,7 @@ function main:Begin(PROPS)
 
             Radio_ElementItemButtonCorner.Name = "Radio_ElementItemButtonCorner"
             Radio_ElementItemButtonCorner.Parent = Radio_ElementItemButton
+            Radio_ElementItemButtonCorner.CornerRadius = UDim.new(1, 0)
 
             Radio_ElementItemButtonState.Name = "Radio_ElementItemButtonState"
             Radio_ElementItemButtonState.Parent = Radio_ElementItemButton
@@ -914,6 +915,7 @@ function main:Begin(PROPS)
 
             Radio_ElementItemButtonStateCorner.Name = "Radio_ElementItemButtonStateCorner"
             Radio_ElementItemButtonStateCorner.Parent = Radio_ElementItemButtonState
+            Radio_ElementItemButtonStateCorner.CornerRadius = UDim.new(1, 0)
 
             Radio_ElementItemButtonInput.Name = "Radio_ElementItemButtonInput"
             Radio_ElementItemButtonInput.Parent = Radio_ElementItemButton
@@ -960,23 +962,15 @@ function main:Begin(PROPS)
             end
 
             Radio_ElementItemButtonInput.MouseButton1Click:Connect(function()
-                for _, rad in pairs(RadioButtons) do 
-                    if not rad.Name == radio and not radioButton.Enabled then
-                        radioButton.Enabled = true
-                        radioButton.Update()
-                        rad.Enabled = false
-                        rad.Update()
-                        pcall(RadioButtonsArgs.OnChanged, radioButton.Enabled)
-                    elseif rad.Name == radio and radioButton.Enabled then
-                        radioButton.Enabled = false
-                        rad.Enabled = false
-                        rad.Update()
-                        pcall(RadioButtonsArgs.OnChanged, radioButton.Enabled)
-                    elseif rad.Name == radio and not radioButton.Enabled then
-                        radioButton.Enabled = true
-                        rad.Enabled = false
-                        rad.Update()
-                        pcall(RadioButtonsArgs.OnChanged, radioButton.Enabled)
+                if not radioButton.Enabled then  -- only do something if the button is not already selected
+                    radioButton.Enabled = true
+                    radioButton.Update()
+                    pcall(RadioButtonsArgs.OnChanged, radioButton.Enabled)
+                    for _, rad in pairs(RadioButtons) do 
+                        if rad ~= radioButton then  -- deselect other buttons
+                            rad.Enabled = false
+                            rad.Update()
+                        end
                     end
                 end
             end)
