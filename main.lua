@@ -910,7 +910,7 @@ function main:Begin(PROPS)
             Radio_ElementItem.Parent = Radio_Element
             Radio_ElementItem.BackgroundColor3 = Color3.fromRGB(41, 74, 122)
             Radio_ElementItem.BackgroundTransparency = 1.000
-            Radio_ElementItem.Size = UDim2.new(0, 23 + (Radio_ElementItemName.TextBounds.X), 1, 0)
+            Radio_ElementItem.Size = UDim2.new(0, 23 + (Radio_ElementItemName.TextBounds.X) + 7, 1, 0)
 
             Radio_ElementItemLayout.Name = "Radio_ElementItemLayout"
             Radio_ElementItemLayout.Parent = Radio_ElementItem
