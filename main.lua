@@ -832,30 +832,30 @@ function main:Begin(PROPS)
             if redDown and input.UserInputType == Enum.UserInputType.MouseMovement then
                 local colorVector = Vector3.new(input.Position.X, input.Position.Y, 0)
                 local colorValue = math.floor(colorVector.X / Color_ElementRedButtonInput.AbsoluteSize.X * 255)
-                CurrentColor = Color3.fromRGB(colorValue, CurrentColor.G, CurrentColor.B)
+                local newColor = Color3.fromRGB(colorValue, CurrentColor.G, CurrentColor.B)
 
                 Color_ElementRedTextInput.Text = string.format("R:%s", tostring(CurrentColor.R));
-                Color_ElementDisplay.BackgroundColor3 = CurrentColor
+                Color_ElementDisplay.BackgroundColor3 = newColor
                 pcall(ColorPickerArgs.OnChanged, CurrentColor)
             end
 
             if greenDown and input.UserInputType == Enum.UserInputType.MouseMovement then
                 local colorVector = Vector3.new(input.Position.X, input.Position.Y, 0)
                 local colorValue = math.floor(colorVector.X / Color_ElementGreenButtonInput.AbsoluteSize.X * 255)
-                CurrentColor = Color3.fromRGB(CurrentColor.R, colorValue, CurrentColor.B)
+                local newColor = Color3.fromRGB(colorValue.R, CurrentColor, CurrentColor.B)
 
                 Color_ElementGreenTextInput.Text = string.format("G:%s", tostring(CurrentColor.G));
-                Color_ElementDisplay.BackgroundColor3 = CurrentColor
+                Color_ElementDisplay.BackgroundColor3 = newColor
                 pcall(ColorPickerArgs.OnChanged, CurrentColor)
             end
 
             if blueDown and input.UserInputType == Enum.UserInputType.MouseMovement then
                 local colorVector = Vector3.new(input.Position.X, input.Position.Y, 0)
                 local colorValue = math.floor(colorVector.X / Color_ElementBlueButtonInput.AbsoluteSize.X * 255)
-                CurrentColor = Color3.fromRGB(CurrentColor.R, CurrentColor.G, colorValue)
+                local newColor = Color3.fromRGB(colorValue.R, CurrentColor.G, CurrentColor)
 
                 Color_ElementBlueTextInput.Text = string.format("B:%s", tostring(CurrentColor.B));
-                Color_ElementDisplay.BackgroundColor3 = CurrentColor
+                Color_ElementDisplay.BackgroundColor3 = newColor
                 pcall(ColorPickerArgs.OnChanged, CurrentColor)
             end
         end)
