@@ -61,6 +61,7 @@ local SliderInteger = Window:SliderInteger({
 
 -- Checkbox
 local Checkbox = Window:Checkbox({
+    Name = "Checkbox 1",
     Enabled = false,
     OnChanged = function(val) 
         print(val)
