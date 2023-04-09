@@ -647,6 +647,17 @@ function main:Begin(PROPS)
             pcall(CheckBoxOptions.OnChanged, Enabled)
         end)
     end
+    
+    function ElementHandler:Seperator() 
+        local Seperator_Element = Instance.new("Frame")
+        
+        Seperator_Element.Name = "Seperator_Element"
+        Seperator_Element.Parent = WindowElements
+        Seperator_Element.BackgroundColor3 = Color3.fromRGB(74, 74, 83)
+        Seperator_Element.BorderColor3 = Color3.fromRGB(27, 42, 53)
+        Seperator_Element.BorderSizePixel = 0
+        Seperator_Element.Size = UDim2.new(1, 0, 0, 1)
+    end
 
     -- Handle the resize feature
     local TweenService = game:GetService("TweenService")
