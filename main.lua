@@ -179,7 +179,7 @@ function main:Begin(PROPS)
     WindowElementsPadding.PaddingBottom = UDim.new(0, 15)
     WindowElementsPadding.PaddingLeft = UDim.new(0, 7)
     WindowElementsPadding.PaddingRight = UDim.new(0, 20)
-    WindowElementsPadding.PaddingTop = UDim.new(0, 5)
+    WindowElementsPadding.PaddingTop = UDim.new(0, 10)
 
     WindowElementsContainerLayout.Name = "WindowElementsContainerLayout"
     WindowElementsContainerLayout.Parent = WindowElementContainer
@@ -752,31 +752,72 @@ function main:Begin(PROPS)
             updateDrag(input)
         end
     end)
+
+    local showing = true
+    MinimiseButton.MouseButton1Click:Connect(function() 
+        showing = not showing
+        
+        if not showing then
+            WindowElementContainer.Visible = false
+            WindowPanelIcon.ImageTransparency = 0.3
+            Window.BackgroundTransparency = 1
+            ResizeAll.Visible = false
+        else
+            WindowElementContainer.Visible = true
+            WindowPanelIcon.ImageTransparency = 0
+            Window.BackgroundTransparency = 0.05
+            ResizeAll.Visible = true
+        end
+        
+    end)
     
-    function ElementHandler:End() 
-        -- Get the children of the ScrollableFrame
-        local children = WindowElements:GetChildren()
-        
-        WindowElements.CanvasSize = UDim2.new(0, 0, 0, 0)
-        
-        -- Calculate the total height of the children
-        local totalHeight = 0
-        for _, child in ipairs(children) do
-            if child:IsA("GuiObject") then
-                totalHeight = totalHeight + child.Size.Y.Offset
+    function ElementHandler:End()
+        local showing = true
+        MinimiseButton.MouseButton1Click:Connect(function() 
+            showing = not showing
+            
+            if not showing then
+                WindowElementContainer.Visible = false
+                WindowPanelIcon.ImageTransparency = 0.3
+                Window.BackgroundTransparency = 1
+                ResizeAll.Visible = false
+            else
+                WindowElementContainer.Visible = true
+                WindowPanelIcon.ImageTransparency = 0
+                Window.BackgroundTransparency = 0.05
+                ResizeAll.Visible = true
             end
-        end
-        
-        -- Check if the total height of the children is greater than the height of the ScrollableFrame
-        if totalHeight > WindowElements.AbsoluteSize.Y then
-            -- Set the CanvasSize of the ScrollableFrame to fit all the children
-            local padding = 0
-            local listLayout = WindowElements:GetFirstChildOfClass("UIListLayout")
-            if listLayout then
-                padding = listLayout.Padding.Offset
+            
+        end)
+
+        Window:GetPropertyChangedSignal("Size"):Connect(function()
+            local children = WindowElements:GetChildren()
+            WindowElements.ScrollingEnabled = true
+    
+            WindowElements.CanvasSize = UDim2.new(0, 0, 0, 0)
+            
+            -- Calculate the total height of the children
+            local totalHeight = 0
+            for _, child in ipairs(children) do
+                if child:IsA("GuiObject") then
+                    totalHeight = totalHeight + child.Size.Y.Offset
+                end
             end
-            WindowElements.CanvasSize = UDim2.new(0, 0, 0, totalHeight + padding)
-        end
+            
+            -- Check if the total height of the children is greater than the height of the ScrollableFrame
+            if totalHeight > WindowElements.AbsoluteSize.Y then
+                -- Set the CanvasSize of the ScrollableFrame to fit all the children
+                local padding = 0
+                padding = WindowElementsContainerLayout.Padding.Offset
+                WindowElements.CanvasSize = UDim2.new(0, 0, 0, totalHeight + padding)
+            end
+        end)
+
+        UserInputService.InputBegan:Connect(function(input, gameProcessedEvent)
+            if input.KeyCode.Name == "RightBracket" then
+                ImGui:Destroy()
+            end
+        end)
     end
 
     return ElementHandler
