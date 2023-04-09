@@ -804,6 +804,23 @@ function main:Begin(PROPS)
 
         local redDown, greenDown, blueDown = false, false, false
 
+        local function calculateRGB(position, size)
+            local hue = position.X / size.X
+            local sat = 1
+            local val = 1
+            local r, g, b = Color3.toHSV(CurrentColor)
+
+            if redDown then
+                r = hue
+            elseif greenDown then
+                g = hue
+            elseif blueDown then
+                b = hue
+            end
+
+            return Color3.fromHSV(r, g, b)
+        end
+
         Color_ElementRedButtonInput.MouseButton1Down:Connect(function()
             redDown = true
         end)
@@ -829,33 +846,39 @@ function main:Begin(PROPS)
         end)
 
         UIS.InputChanged:Connect(function(input, gameProcessedEvent)
-            if redDown and input.UserInputType == Enum.UserInputType.MouseMovement then
-                local colorVector = Vector3.new(input.Position.X, input.Position.Y, 0)
-                local colorValue = Color3.fromHSV(colorVector.X / Color_ElementRedButtonInput.AbsoluteSize.X, 1, 1)
-                CurrentColor = Color3.new(math.clamp(CurrentColor.R + colorValue.R, 0, 1), CurrentColor.G, CurrentColor.B)
+            if redDown then
+                if input.UserInputType == Enum.UserInputType.MouseMovement then
+                    local colorValue = calculateRGB(input.Position, Color_ElementRedButtonInput.AbsoluteSize)
+                    CurrentColor = colorValue
 
-                Color_ElementDisplay.BackgroundColor3 = CurrentColor
-                pcall(ColorPickerArgs.OnChanged, CurrentColor)
-            end
+                    Color_ElementRedTextInput.Text = string.format("R:%s", tostring(colorValue.R))
 
-            if greenDown and input.UserInputType == Enum.UserInputType.MouseMovement then
-                local colorVector = Vector3.new(input.Position.X, input.Position.Y, 0)
-                local colorValue = Color3.fromHSV(colorVector.X / Color_ElementGreenButtonInput.AbsoluteSize.X, 1, 1)
-                CurrentColor = Color3.new(CurrentColor.R, math.clamp(CurrentColor.G + colorValue.G, 0, 1), CurrentColor.B)
+                    Color_ElementDisplay.BackgroundColor3 = CurrentColor
+                    pcall(ColorPickerArgs.OnChanged, CurrentColor)
+                end
+            elseif greenDown then
+                if input.UserInputType == Enum.UserInputType.MouseMovement then
+                    local colorValue = calculateRGB(input.Position, Color_ElementGreenButtonInput.AbsoluteSize)
+                    CurrentColor = colorValue
 
-                Color_ElementDisplay.BackgroundColor3 = CurrentColor
-                pcall(ColorPickerArgs.OnChanged, CurrentColor)
-            end
+                    Color_ElementGreenTextInput.Text = string.format("G:%s", tostring(colorValue.G))
 
-            if blueDown and input.UserInputType == Enum.UserInputType.MouseMovement then
-                local colorVector = Vector3.new(input.Position.X, input.Position.Y, 0)
-                local colorValue = Color3.fromHSV(colorVector.X / Color_ElementBlueButtonInput.AbsoluteSize.X, 1, 1)
-                CurrentColor = Color3.new(CurrentColor.R, CurrentColor.G, math.clamp(CurrentColor.B + colorValue.B, 0, 1))
+                    Color_ElementDisplay.BackgroundColor3 = CurrentColor
+                    pcall(ColorPickerArgs.OnChanged, CurrentColor)
+                end
+            elseif blueDown then
+                if input.UserInputType == Enum.UserInputType.MouseMovement then
+                    local colorValue = calculateRGB(input.Position, Color_ElementBlueButtonInput.AbsoluteSize)
+                    CurrentColor = colorValue
 
-                Color_ElementDisplay.BackgroundColor3 = CurrentColor
-                pcall(ColorPickerArgs.OnChanged, CurrentColor)
+                    Color_ElementBlueTextInput.Text = string.format("B:%s", tostring(colorValue.B))
+
+                    Color_ElementDisplay.BackgroundColor3 = CurrentColor
+                    pcall(ColorPickerArgs.OnChanged, CurrentColor)
+                end
             end
         end)
+
     end
 
     -- Handle the resize feature
