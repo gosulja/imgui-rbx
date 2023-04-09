@@ -799,82 +799,70 @@ function main:Begin(PROPS)
 
         local UIS = game:GetService("UserInputService")
         local CurrentColor = ColorPickerArgs.DefaultColor or Color3.fromRGB(255, 255, 255)
-
+        
         Color_ElementDisplay.BackgroundColor3 = CurrentColor
-
+        
         local redDown, greenDown, blueDown = false, false, false
-
+        
         Color_ElementRedButtonInput.MouseButton1Down:Connect(function()
             redDown = true
         end)
-
+        
         Color_ElementGreenButtonInput.MouseButton1Down:Connect(function()
             greenDown = true
         end)
-
+        
         Color_ElementBlueButtonInput.MouseButton1Down:Connect(function()
             blueDown = true
         end)
-
+        
         Color_ElementRedButtonInput.MouseButton1Up:Connect(function()
             redDown = false
         end)
-
+        
         Color_ElementGreenButtonInput.MouseButton1Up:Connect(function()
             greenDown = false
         end)
-
+        
         Color_ElementBlueButtonInput.MouseButton1Up:Connect(function()
             blueDown = false
         end)
-
+        
         UIS.InputChanged:Connect(function(input, gameProcessedEvent)
             if redDown and input.UserInputType == Enum.UserInputType.MouseMovement then
                 local colorVector = Vector3.new(input.Position.X, input.Position.Y, 0)
                 local colorValue = math.floor(colorVector.X / Color_ElementRedButtonInput.AbsoluteSize.X * 255)
                 local newColor = Color3.fromRGB(colorValue, CurrentColor.G, CurrentColor.B)
-
-                Color_ElementRedTextInput.Text = string.format("R:%s", tostring(CurrentColor.R));
+        
+                Color_ElementRedTextInput.Text = string.format("R:%s", tostring(colorValue));
                 Color_ElementDisplay.BackgroundColor3 = newColor
-                pcall(ColorPickerArgs.OnChanged, CurrentColor)
+                pcall(ColorPickerArgs.OnChanged, newColor)
+                CurrentColor = newColor
             end
-
+        
             if greenDown and input.UserInputType == Enum.UserInputType.MouseMovement then
                 local colorVector = Vector3.new(input.Position.X, input.Position.Y, 0)
                 local colorValue = math.floor(colorVector.X / Color_ElementGreenButtonInput.AbsoluteSize.X * 255)
-                local newColor = Color3.fromRGB(colorValue.R, CurrentColor, CurrentColor.B)
-
-                Color_ElementGreenTextInput.Text = string.format("G:%s", tostring(CurrentColor.G));
+                local newColor = Color3.fromRGB(CurrentColor.R, colorValue, CurrentColor.B)
+        
+                Color_ElementGreenTextInput.Text = string.format("G:%s", tostring(colorValue));
                 Color_ElementDisplay.BackgroundColor3 = newColor
-                pcall(ColorPickerArgs.OnChanged, CurrentColor)
+                pcall(ColorPickerArgs.OnChanged, newColor)
+                CurrentColor = newColor
             end
-
+        
             if blueDown and input.UserInputType == Enum.UserInputType.MouseMovement then
                 local colorVector = Vector3.new(input.Position.X, input.Position.Y, 0)
                 local colorValue = math.floor(colorVector.X / Color_ElementBlueButtonInput.AbsoluteSize.X * 255)
-                local newColor = Color3.fromRGB(colorValue.R, CurrentColor.G, CurrentColor)
-
-                Color_ElementBlueTextInput.Text = string.format("B:%s", tostring(CurrentColor.B));
+                local newColor = Color3.fromRGB(CurrentColor.R, CurrentColor.G, colorValue)
+        
+                Color_ElementBlueTextInput.Text = string.format("B:%s", tostring(colorValue));
                 Color_ElementDisplay.BackgroundColor3 = newColor
-                pcall(ColorPickerArgs.OnChanged, CurrentColor)
+                pcall(ColorPickerArgs.OnChanged, newColor)
+                CurrentColor = newColor
             end
         end)
-
-        UIS.InputEnded:Connect(function(input, gameProcessedEvent)
-            if input.UserInputType.Name == "MouseButton1" then
-                if redDown then
-                    redDown = false
-                end
-
-                if greenDown then
-                    greenDown = false
-                end
-
-                if blueDown then
-                    blueDown = false
-                end
-            end
-        end)
+        
 
 
 
