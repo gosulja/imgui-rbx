@@ -620,31 +620,31 @@ function main:Begin(PROPS)
             updateDrag(input)
         end
     end)
-
-    local ScrollableFrame = WindowElements
     
-    -- Get the children of the ScrollableFrame
-    local children = ScrollableFrame:GetChildren()
-    
-    ScrollableFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
-    
-    -- Calculate the total height of the children
-    local totalHeight = 0
-    for _, child in ipairs(children) do
-        if child:IsA("GuiObject") then
-            totalHeight = totalHeight + child.Size.Y.Offset
+    function ElementHandler:End() 
+        -- Get the children of the ScrollableFrame
+        local children = WindowElements:GetChildren()
+        
+        WindowElements.CanvasSize = UDim2.new(0, 0, 0, 0)
+        
+        -- Calculate the total height of the children
+        local totalHeight = 0
+        for _, child in ipairs(children) do
+            if child:IsA("GuiObject") then
+                totalHeight = totalHeight + child.Size.Y.Offset
+            end
         end
-    end
-    
-    -- Check if the total height of the children is greater than the height of the ScrollableFrame
-    if totalHeight > ScrollableFrame.AbsoluteSize.Y then
-        -- Set the CanvasSize of the ScrollableFrame to fit all the children
-        local padding = 0
-        local listLayout = ScrollableFrame:GetFirstChildOfClass("UIListLayout")
-        if listLayout then
-            padding = listLayout.Padding.Offset
+        
+        -- Check if the total height of the children is greater than the height of the ScrollableFrame
+        if totalHeight > WindowElements.AbsoluteSize.Y then
+            -- Set the CanvasSize of the ScrollableFrame to fit all the children
+            local padding = 0
+            local listLayout = WindowElements:GetFirstChildOfClass("UIListLayout")
+            if listLayout then
+                padding = listLayout.Padding.Offset
+            end
+            WindowElements.CanvasSize = UDim2.new(0, 0, 0, totalHeight + padding)
         end
-        ScrollableFrame.CanvasSize = UDim2.new(0, 0, 0, totalHeight + padding)
     end
 
     return ElementHandler
