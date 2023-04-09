@@ -233,6 +233,12 @@ function main:Begin(PROPS)
         function OnClick:Connect(Function) 
             Button_Element.MouseButton1Click:Connect(Function)
         end
+                
+        local box = Button_Element
+        local text = box.Text
+
+        local size = box.TextBounds.X
+        box.Size = UDim2.new(0, size, 0, 23)
 
         return OnClick
     end
@@ -606,7 +612,7 @@ function main:Begin(PROPS)
         CheckBox_ElementImage.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
         CheckBox_ElementImage.BackgroundTransparency = 1.000
         CheckBox_ElementImage.Position = UDim2.new(0.5, 0, 0.5, 0)
-        CheckBox_ElementImage.Size = UDim2.new(0, 16, 0, 16)
+        CheckBox_ElementImage.Size = UDim2.new(0, 14, 0, 16)
         CheckBox_ElementImage.Image = "rbxassetid://13058405207"
         
         CheckBox_ElementName.Name = "CheckBox_ElementName"
