@@ -800,7 +800,7 @@ function main:Begin(PROPS)
         local UIS = game:GetService("UserInputService")
         local CurrentColor = ColorPickerArgs.DefaultColor or Color3.fromRGB(255, 255, 255)
 
-        local R, G, B = 0, 0, 0;
+        local R, G, B = CurrentColor.R, CurrentColor.G, CurrentColor.B;
 
         local function setColor()
             Color_ElementDisplay.BackgroundColor3 = CurrentColor
@@ -812,6 +812,10 @@ function main:Begin(PROPS)
 
             setColor()
         end
+
+        Color_ElementRedTextInput.Text = string.format("R:%s", R);
+        Color_ElementGreenTextInput.Text = string.format("G:%s", G);
+        Color_ElementBlueTextInput.Text = string.format("B:%s", B);
 
         setColor()
 
