@@ -16,4 +16,6 @@ local colorPicker = Window:ColorPicker3({
 
 Window:Seperator()
 
+Window:Text("Idk is it working?!?!")
+
 Window:End()

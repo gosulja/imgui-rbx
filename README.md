@@ -24,7 +24,7 @@ Resizing feature (gyazo made it look buggy)
 | Input Text                | true  | true       | none                 |
 | Plot Lines                | false | false      | none                 |
 | Menu Bar                  | false | false      | none                 |
-| Color Picker              | true  | false      | logic not added yet  |
+| Color Picker              | true  | false      | added logic, fixings |
 | Text Colored              | false | false      | none                 |
 
 
