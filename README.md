@@ -52,5 +52,8 @@ local Checkbox = Window:Checkbox({
         print(val)
     end
 })
+
+-- THIS IS NEEDED, it runs all functions which need to be executed last
+Window:End()       
 ```
 
