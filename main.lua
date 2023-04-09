@@ -798,45 +798,81 @@ function main:Begin(PROPS)
         Color_ElementName.TextXAlignment = Enum.TextXAlignment.Left
 
         local UIS = game:GetService("UserInputService")
-        local CurrentColor = Color3.new(1, 1, 1)
+        local CurrentColor = ColorPickerArgs.DefaultColor or Color3.fromRGB(255, 255, 255)
 
         Color_ElementDisplay.BackgroundColor3 = CurrentColor
 
         local redDown, greenDown, blueDown = false, false, false
 
-        local function updateColor(buttonInput, colorComponent)
-            local function getColorValue(input)
-                local pos = input.Position.X
-                local size = buttonInput.AbsoluteSize.X
-                return math.clamp(pos / size, 0, 1)
-            end
-
-            while buttonInput:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) do
-                local value = getColorValue(UIS:GetMouseLocation() - buttonInput.AbsolutePosition)
-                CurrentColor = CurrentColor - colorComponent + Color3.fromHSV(value, 1, 1) * colorComponent
-                Color_ElementDisplay.BackgroundColor3 = CurrentColor
-                pcall(ColorPickerArgs.OnChanged, CurrentColor)
-                wait()
-            end
-        end
-
         Color_ElementRedButtonInput.MouseButton1Down:Connect(function()
             redDown = true
-            updateColor(Color_ElementRedButtonInput, Color3.new(1, 0, 0))
-            redDown = false
         end)
 
         Color_ElementGreenButtonInput.MouseButton1Down:Connect(function()
             greenDown = true
-            updateColor(Color_ElementGreenButtonInput, Color3.new(0, 1, 0))
-            greenDown = false
         end)
 
         Color_ElementBlueButtonInput.MouseButton1Down:Connect(function()
             blueDown = true
-            updateColor(Color_ElementBlueButtonInput, Color3.new(0, 0, 1))
+        end)
+
+        Color_ElementRedButtonInput.MouseButton1Up:Connect(function()
+            redDown = false
+        end)
+
+        Color_ElementGreenButtonInput.MouseButton1Up:Connect(function()
+            greenDown = false
+        end)
+
+        Color_ElementBlueButtonInput.MouseButton1Up:Connect(function()
             blueDown = false
         end)
+
+        UIS.InputChanged:Connect(function(input, gameProcessedEvent)
+            if redDown and input.UserInputType == Enum.UserInputType.MouseMovement then
+                local colorVector = Vector3.new(input.Position.X, input.Position.Y, 0)
+                local colorValue = math.floor(colorVector.X / Color_ElementRedButtonInput.AbsoluteSize.X * 255)
+                CurrentColor = Color3.fromRGB(colorValue, CurrentColor.G, CurrentColor.B)
+
+                Color_ElementDisplay.BackgroundColor3 = CurrentColor
+                pcall(ColorPickerArgs.OnChanged, CurrentColor)
+            end
+
+            if greenDown and input.UserInputType == Enum.UserInputType.MouseMovement then
+                local colorVector = Vector3.new(input.Position.X, input.Position.Y, 0)
+                local colorValue = math.floor(colorVector.X / Color_ElementGreenButtonInput.AbsoluteSize.X * 255)
+                CurrentColor = Color3.fromRGB(CurrentColor.R, colorValue, CurrentColor.B)
+
+                Color_ElementDisplay.BackgroundColor3 = CurrentColor
+                pcall(ColorPickerArgs.OnChanged, CurrentColor)
+            end
+
+            if blueDown and input.UserInputType == Enum.UserInputType.MouseMovement then
+                local colorVector = Vector3.new(input.Position.X, input.Position.Y, 0)
+                local colorValue = math.floor(colorVector.X / Color_ElementBlueButtonInput.AbsoluteSize.X * 255)
+                CurrentColor = Color3.fromRGB(CurrentColor.R, CurrentColor.G, colorValue)
+
+                Color_ElementDisplay.BackgroundColor3 = CurrentColor
+                pcall(ColorPickerArgs.OnChanged, CurrentColor)
+            end
+        end)
+
+        UIS.InputEnded:Connect(function(input, gameProcessedEvent)
+            if input.UserInputType.Name == "MouseButton1" then
+                if redDown then
+                    redDown = false
+                end
+
+                if greenDown then
+                    greenDown = false
+                end
+
+                if blueDown then
+                    blueDown = false
+                end
+            end
+        end)
+
 
 
     end
