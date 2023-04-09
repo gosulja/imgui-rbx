@@ -813,9 +813,9 @@ function main:Begin(PROPS)
             setColor()
         end
 
-        Color_ElementRedTextInput.Text = string.format("R:%s", R);
-        Color_ElementGreenTextInput.Text = string.format("G:%s", G);
-        Color_ElementBlueTextInput.Text = string.format("B:%s", B);
+        Color_ElementRedTextInput.Text = string.format("R:%s", CurrentColor.R);
+        Color_ElementGreenTextInput.Text = string.format("G:%s", CurrentColor.G);
+        Color_ElementBlueTextInput.Text = string.format("B:%s", CurrentColor.B);
 
         setColor()
 
