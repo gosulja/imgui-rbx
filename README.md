@@ -37,9 +37,21 @@ local Input = Window:InputText({
     end
 })
 
--- Slider
+-- Slider float
 local Slider = Window:SliderFloat({
     Name = "Slider float example",
+    Min = 0,
+    Max = 1000,
+    OnChanged = function(val) 
+        print(string.format("Value changed to: %s", tostring(val)))
+    end
+})
+
+-- Slider int
+local Slider = Window:SliderInteger({
+    Name = "Slider integer example",
+    Min = 0,
+    Max = 1000,
     OnChanged = function(val) 
         print(string.format("Value changed to: %s", tostring(val)))
     end
