@@ -3,6 +3,8 @@
 A Dear ImGui clone for roblox.
 `This is an alpha release of imgui-rbx, expect some bugs and more elements being added soon`
 
+![Example](https://cdn.discordapp.com/attachments/1089941257117257731/1094674670030172290/image.png)
+
 # Documentation
 ```lua
 local ImGui = loadstring(game:HttpGet("https://raw.githubusercontent.com/wiIlow/imgui-rbx/main/main.lua", true))()
