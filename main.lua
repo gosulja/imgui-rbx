@@ -972,6 +972,11 @@ function main:Begin(PROPS)
                         rad.Enabled = false
                         rad.Update()
                         pcall(RadioButtonsArgs.OnChanged, radioButton.Enabled)
+                    elseif rad.Name == radio and not radioButton.Enabled then
+                        radioButton.Enabled = true
+                        rad.Enabled = false
+                        rad.Update()
+                        pcall(RadioButtonsArgs.OnChanged, radioButton.Enabled)
                     end
                 end
             end)

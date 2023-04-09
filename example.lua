@@ -8,8 +8,8 @@ local Window = ImGui:Begin({
 
 local radios = Window:RadioButtons({
     Default = "Test 1",
-    Buttons = {"Test 1", "Test 2", "Test 3"}
-    
+    Buttons = {"Test 1", "Test 2", "Test 3"},
+    OnChanged = function(x) print(x) end
 })
 
 Window:Seperator()
