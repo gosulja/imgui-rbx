@@ -868,8 +868,6 @@ function main:Begin(PROPS)
         Radio_ElementLayout.Padding = UDim.new(0, 7)
 
         local Default = RadioButtonsArgs.Default
-
-        local SelectedButton = nil
         local RadioButtons = {}
 
         for i, radio in pairs(RadioButtonsArgs.Buttons) do 
@@ -924,7 +922,7 @@ function main:Begin(PROPS)
             Radio_ElementItemButtonInput.BorderSizePixel = 0
             Radio_ElementItemButtonInput.Position = UDim2.new(0, 0, 0, 0)
             Radio_ElementItemButtonInput.Size = UDim2.new(1, 0, 1, 0)
-            Radio_ElementItemButtonInput.Font = Enum.Font.SourceSans
+            Radio_ElementItemButtonInput.FontFace = GetFont()
             Radio_ElementItemButtonInput.Text = ""
             Radio_ElementItemButtonInput.TextColor3 = Color3.fromRGB(0, 0, 0)
             Radio_ElementItemButtonInput.TextSize = 14.000
@@ -935,7 +933,7 @@ function main:Begin(PROPS)
             Radio_ElementItemName.BackgroundTransparency = 1.000
             Radio_ElementItemName.Position = UDim2.new(0.259615391, 0, 0.100000001, 0)
             Radio_ElementItemName.Size = UDim2.new(0.740384638, 0, 0.800000012, 0)
-            Radio_ElementItemName.Font = Enum.Font.SourceSans
+            Radio_ElementItemName.FontFace = GetFont()
             Radio_ElementItemName.Text = radio
             Radio_ElementItemName.TextColor3 = Color3.fromRGB(255, 255, 255)
             Radio_ElementItemName.TextSize = 14.000
