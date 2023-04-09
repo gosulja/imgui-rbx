@@ -52,6 +52,7 @@ function main:Begin(PROPS)
 
     ImGui.Name = string.format("ImGui-%s", tostring(syn.crypt.base64.encode(game:GetService("Players").LocalPlayer.UserId)))
     ImGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+    ImGui.ResetOnRespawn = false
     SecureGui(ImGui)
 
     Window.Name = "Window"
@@ -238,7 +239,8 @@ function main:Begin(PROPS)
         local text = box.Text
 
         local size = box.TextBounds.X
-        box.Size = UDim2.new(0, size, 0, 23)
+        
+        if game:IsLoaded() then box.Size = UDim2.new(0, size, 0, 23) end
 
         return OnClick
     end
@@ -625,6 +627,12 @@ function main:Begin(PROPS)
         CheckBox_ElementName.TextColor3 = Color3.fromRGB(255, 255, 255)
         CheckBox_ElementName.TextSize = 17.000
         CheckBox_ElementName.TextXAlignment = Enum.TextXAlignment.Left
+                
+        if Enabled then
+            CheckBox_ElementImage.Visible = true
+        else
+            CheckBox_ElementImage.Visible = false
+        end
 
         CheckBox_ElementBoxInput.MouseButton1Click:Connect(function()
             Enabled = not Enabled
