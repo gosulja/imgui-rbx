@@ -824,7 +824,7 @@ function main:Begin(PROPS)
                         local value = math.floor(x / colorButton.AbsoluteSize.X * 255 + 0.5)
                         local color = string.sub(colorButton.Name, 14, 14)
                         updateColor(color, value)
-                        wait()
+                        task.wait()
                     end
                 end)
             end
