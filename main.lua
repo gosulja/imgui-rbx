@@ -936,7 +936,7 @@ function main:Begin(PROPS)
             Radio_ElementItemName.Position = UDim2.new(0.259615391, 0, 0.100000001, 0)
             Radio_ElementItemName.Size = UDim2.new(0.740384638, 0, 0.800000012, 0)
             Radio_ElementItemName.Font = Enum.Font.SourceSans
-            Radio_ElementItemName.Text = radio.Name
+            Radio_ElementItemName.Text = radio
             Radio_ElementItemName.TextColor3 = Color3.fromRGB(255, 255, 255)
             Radio_ElementItemName.TextSize = 14.000
             Radio_ElementItemName.TextXAlignment = Enum.TextXAlignment.Left
@@ -968,10 +968,12 @@ function main:Begin(PROPS)
                         radioButton.Update()
                         rad.Enabled = false
                         rad.Update()
+                        pcall(RadioButtonsArgs.OnChanged, radioButton.Enabled)
                     elseif rad.Name == radio and radioButton.Enabled then
                         radioButton.Enabled = false
                         rad.Enabled = false
                         rad.Update()
+                        pcall(RadioButtonsArgs.OnChanged, radioButton.Enabled)
                     end
                 end
             end)
