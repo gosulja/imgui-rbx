@@ -141,6 +141,7 @@ function main:Begin(PROPS)
     ResizeAll.Text = ""
     ResizeAll.TextColor3 = Color3.fromRGB(0, 0, 0)
     ResizeAll.TextSize = 14.000
+    ResizeAll.ZIndex = 2
 
     ResizeAllIcon.Name = "ResizeAllIcon"
     ResizeAllIcon.Parent = ResizeAll
