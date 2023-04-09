@@ -18,6 +18,7 @@ Resizing feature (gyazo made it look buggy)
 | Text / Label              | true  | true       | none                 |
 | Checkbox / Toggle         | true  | true       | none                 |
 | Slider/s (Integer, Float) | true  | semi       | numbers not rounding |
+| Seperator                 | true  | true       | none                 |
 | Input Text                | true  | true       | none                 |
 | Plot Lines                | false | false      | none                 |
 | Menu Bar                  | false | false      | none                 |
