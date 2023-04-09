@@ -10,6 +10,12 @@ Resizing feature (gyazo made it look buggy)
 
 ![](https://user-images.githubusercontent.com/111649405/230788331-c3af0e11-5ac7-4fdb-8a85-427b66f63232.gif)
 
+
+ColorPicker3 Example
+
+![](https://user-images.githubusercontent.com/111649405/230796228-78263db7-4066-4ca8-aa1e-ce69865b44b6.gif)
+
+
 ## Current Theme: Legacy (More will be added soon)
 
 # Progress
