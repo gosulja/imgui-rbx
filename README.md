@@ -38,7 +38,7 @@ local Input = Window:InputText({
 })
 
 -- Slider float
-local Slider = Window:SliderFloat({
+local SliderFloat = Window:SliderFloat({
     Name = "Slider float example",
     Min = 0,
     Max = 1000,
@@ -49,7 +49,7 @@ local Slider = Window:SliderFloat({
 })
 
 -- Slider int
-local Slider = Window:SliderInteger({
+local SliderInteger = Window:SliderInteger({
     Name = "Slider integer example",
     Min = 0,
     Max = 1000,
