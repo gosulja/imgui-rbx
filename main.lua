@@ -530,7 +530,7 @@ function main:Begin(PROPS)
                 sliderValue = maxValue
             else
                 -- The slider is in the middle of the track, so update the slider value accordingly
-                sliderValue = minValue + (maxValue - minValue) * sliderPosition
+                sliderValue = math.floor(minValue + (maxValue - minValue) * sliderPosition)
             end
 
             Slider_ElementValue.Text = string.format("%."..decimalPlaces.."f", sliderValue)
@@ -798,56 +798,54 @@ function main:Begin(PROPS)
         Color_ElementName.TextXAlignment = Enum.TextXAlignment.Left
 
         local UIS = game:GetService("UserInputService")
+        local CurrentColor = ColorPickerArgs.DefaultColor or Color3.fromRGB(255, 255, 255)
 
-        -- Map of color button names to their corresponding text input and display elements
-        local colorElements = {
-            Red = {
-                ButtonInput = Color_ElementRedButtonInput,
-                TextInput = Color_ElementRedTextInput,
-                Display = Color_ElementDisplay
-            },
-            Green = {
-                ButtonInput = Color_ElementGreenButtonInput,
-                TextInput = Color_ElementGreenTextInput,
-                Display = Color_ElementDisplay
-            },
-            Blue = {
-                ButtonInput = Color_ElementBlueButtonInput,
-                TextInput = Color_ElementBlueTextInput,
-                Display = Color_ElementDisplay
-            }
-        }
+        Color_ElementDisplay.BackgroundColor3 = CurrentColor
 
-        -- Set up event listeners for each color button
-        for colorName, colorElement in pairs(colorElements) do
-            local currentColorValue = 255
+        local function updateColor()
+            local newColor = Color3.fromRGB(
+                math.floor(Color_ElementRedButtonInput.AbsolutePosition.X / Color_ElementRedButtonInput.AbsoluteSize.X * 255 + 0.5),
+                math.floor(Color_ElementGreenButtonInput.AbsolutePosition.X / Color_ElementGreenButtonInput.AbsoluteSize.X * 255 + 0.5),
+                math.floor(Color_ElementBlueButtonInput.AbsolutePosition.X / Color_ElementBlueButtonInput.AbsoluteSize.X * 255 + 0.5)
+            )
 
-            colorElement.ButtonInput.MouseButton1Down:Connect(function()
-                while UIS:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) do
-                    -- Calculate slider value based on mouse position
-                    local sliderValue = math.clamp(UIS:GetMouseLocation().X - colorElement.ButtonInput.AbsolutePosition.X, 1, 255)
-
-                    -- Update the text input and display elements
-                    colorElement.TextInput.Text = colorName .. ": " .. tostring(sliderValue)
-                    colorElement.Display.BackgroundColor3 = Color3.fromRGB(
-                        colorName == "Red" and sliderValue or currentColorValue,
-                        colorName == "Green" and sliderValue or currentColorValue,
-                        colorName == "Blue" and sliderValue or currentColorValue
-                    )
-
-                    -- Update the current color value
-                    if sliderValue ~= currentColorValue then
-                        currentColorValue = sliderValue
-                        -- Call a callback function if it exists
-                        if ColorPickerArgs and ColorPickerArgs.OnChanged then
-                            pcall(ColorPickerArgs.OnChanged, colorElement.Display.BackgroundColor3)
-                        end
-                    end
-
-                    task.wait()
-                end
-            end)
+            Color_ElementDisplay.BackgroundColor3 = newColor
+            pcall(ColorPickerArgs.OnChanged, newColor)
         end
+
+        Color_ElementRedButtonInput.MouseButton1Down:Connect(function()
+            while UIS:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) do
+                local mousePosition = UIS:GetMouseLocation()
+                local relativePosition = mousePosition.X - Color_ElementRedButtonInput.AbsolutePosition.X
+                relativePosition = math.clamp(relativePosition, 0, Color_ElementRedButtonInput.AbsoluteSize.X)
+                Color_ElementRedButtonInput.Size = UDim2.new(0, relativePosition, 1, 0)
+                updateColor()
+                wait()
+            end
+        end)
+
+        Color_ElementGreenButtonInput.MouseButton1Down:Connect(function()
+            while UIS:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) do
+                local mousePosition = UIS:GetMouseLocation()
+                local relativePosition = mousePosition.X - Color_ElementGreenButtonInput.AbsolutePosition.X
+                relativePosition = math.clamp(relativePosition, 0, Color_ElementGreenButtonInput.AbsoluteSize.X)
+                Color_ElementGreenButtonInput.Size = UDim2.new(0, relativePosition, 1, 0)
+                updateColor()
+                wait()
+            end
+        end)
+
+        Color_ElementBlueButtonInput.MouseButton1Down:Connect(function()
+            while UIS:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) do
+                local mousePosition = UIS:GetMouseLocation()
+                local relativePosition = mousePosition.X - Color_ElementBlueButtonInput.AbsolutePosition.X
+                relativePosition = math.clamp(relativePosition, 0, Color_ElementBlueButtonInput.AbsoluteSize.X)
+                Color_ElementBlueButtonInput.Size = UDim2.new(0, relativePosition, 1, 0)
+                updateColor()
+                wait()
+            end
+        end)
+
 
         
 

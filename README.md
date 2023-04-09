@@ -19,7 +19,7 @@ Resizing feature (gyazo made it look buggy)
 | Themes                    | false | false      | only legacy theme    |
 | Text / Label              | true  | true       | none                 |
 | Checkbox / Toggle         | true  | true       | none                 |
-| Slider/s (Integer, Float) | true  | semi       | numbers not rounding |
+| Slider/s (Integer, Float) | true  | semi       | none                 |
 | Seperator                 | true  | true       | none                 |
 | Input Text                | true  | true       | none                 |
 | Plot Lines                | false | false      | none                 |
