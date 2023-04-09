@@ -825,7 +825,7 @@ function main:Begin(PROPS)
             colorElement.ButtonInput.MouseButton1Down:Connect(function()
                 while UIS:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) do
                     -- Calculate slider value based on mouse position
-                    local sliderValue = math.clamp(UIS.MousePosition.X - colorElement.ButtonInput.AbsolutePosition.X, 1, 255)
+                    local sliderValue = math.clamp(UIS:GetMouseLocation().X - colorElement.ButtonInput.AbsolutePosition.X, 1, 255)
 
                     -- Update the text input and display elements
                     colorElement.TextInput.Text = colorName .. ": " .. tostring(sliderValue)
@@ -844,7 +844,7 @@ function main:Begin(PROPS)
                         end
                     end
 
-                    wait()
+                    task.wait()
                 end
             end)
         end
