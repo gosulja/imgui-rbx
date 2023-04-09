@@ -834,6 +834,7 @@ function main:Begin(PROPS)
                 local colorValue = math.floor(colorVector.X / Color_ElementRedButtonInput.AbsoluteSize.X * 255)
                 CurrentColor = Color3.fromRGB(colorValue, CurrentColor.G, CurrentColor.B)
 
+                Color_ElementRedTextInput.Text = string.format("R:%s", tostring(CurrentColor.R));
                 Color_ElementDisplay.BackgroundColor3 = CurrentColor
                 pcall(ColorPickerArgs.OnChanged, CurrentColor)
             end
@@ -843,6 +844,7 @@ function main:Begin(PROPS)
                 local colorValue = math.floor(colorVector.X / Color_ElementGreenButtonInput.AbsoluteSize.X * 255)
                 CurrentColor = Color3.fromRGB(CurrentColor.R, colorValue, CurrentColor.B)
 
+                Color_ElementGreenTextInput.Text = string.format("G:%s", tostring(CurrentColor.G));
                 Color_ElementDisplay.BackgroundColor3 = CurrentColor
                 pcall(ColorPickerArgs.OnChanged, CurrentColor)
             end
@@ -852,6 +854,7 @@ function main:Begin(PROPS)
                 local colorValue = math.floor(colorVector.X / Color_ElementBlueButtonInput.AbsoluteSize.X * 255)
                 CurrentColor = Color3.fromRGB(CurrentColor.R, CurrentColor.G, colorValue)
 
+                Color_ElementBlueTextInput.Text = string.format("B:%s", tostring(CurrentColor.B));
                 Color_ElementDisplay.BackgroundColor3 = CurrentColor
                 pcall(ColorPickerArgs.OnChanged, CurrentColor)
             end
