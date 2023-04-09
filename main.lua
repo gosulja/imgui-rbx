@@ -240,7 +240,7 @@ function main:Begin(PROPS)
 
         local size = box.TextBounds.X
         
-        if game:IsLoaded() then box.Size = UDim2.new(0, size + 10, 0, 23) end
+        if game:IsLoaded() then box.Size = UDim2.new(0, size + 20, 0, 23) end
 
         return OnClick
     end
@@ -816,7 +816,7 @@ function main:Begin(PROPS)
             local totalHeight = 0
             for _, child in ipairs(children) do
                 if child:IsA("GuiObject") then
-                    totalHeight = totalHeight + child.Size.Y.Offset
+                    totalHeight = (totalHeight + child.Size.Y.Offset) + 5
                 end
             end
             
