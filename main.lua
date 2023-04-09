@@ -52,7 +52,7 @@ function main:Begin(PROPS)
 
     ImGui.Name = string.format("ImGui-%s", tostring(syn.crypt.base64.encode(game:GetService("Players").LocalPlayer.UserId)))
     ImGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-    ImGui.ResetOnRespawn = false
+    ImGui.ResetOnSpawn = false
     SecureGui(ImGui)
 
     Window.Name = "Window"
