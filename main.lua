@@ -798,7 +798,6 @@ function main:Begin(PROPS)
         Color_ElementName.TextXAlignment = Enum.TextXAlignment.Left
 
         local UIS = game:GetService("UserInputService")
-        local Dragging = false
         local CurrentColor = Color3.fromRGB(255, 255, 255) or ColorPickerArgs.DefaultColor
 
         Color_ElementDisplay.BackgroundColor3 = CurrentColor
@@ -833,7 +832,7 @@ function main:Begin(PROPS)
             if redDown and input.UserInputType == Enum.UserInputType.MouseMovement then
                 local colorVector = Vector3.new(input.Position.X, input.Position.Y, 0)
                 local colorValue = Color3.fromHSV(colorVector.X / Color_ElementRedButtonInput.AbsoluteSize.X, 1, 1)
-                CurrentColor.R = colorValue
+                CurrentColor = CurrentColor + Color3.fromRGB(colorValue, 0, 0)
 
                 Color_ElementDisplay.BackgroundColor3 = CurrentColor
                 pcall(ColorPickerArgs.OnChanged, CurrentColor)
@@ -842,7 +841,7 @@ function main:Begin(PROPS)
             if greenDown and input.UserInputType == Enum.UserInputType.MouseMovement then
                 local colorVector = Vector3.new(input.Position.X, input.Position.Y, 0)
                 local colorValue = Color3.fromHSV(colorVector.X / Color_ElementGreenButtonInput.AbsoluteSize.X, 1, 1)
-                CurrentColor.G = colorValue
+                CurrentColor = CurrentColor + Color3.fromRGB(0, colorValue, 0)
 
                 Color_ElementDisplay.BackgroundColor3 = CurrentColor
                 pcall(ColorPickerArgs.OnChanged, CurrentColor)
@@ -851,7 +850,7 @@ function main:Begin(PROPS)
             if blueDown and input.UserInputType == Enum.UserInputType.MouseMovement then
                 local colorVector = Vector3.new(input.Position.X, input.Position.Y, 0)
                 local colorValue = Color3.fromHSV(colorVector.X / Color_ElementBlueButtonInput.AbsoluteSize.X, 1, 1)
-                CurrentColor.B = colorValue
+                CurrentColor = CurrentColor + Color3.fromRGB(0, 0, colorValue)
 
                 Color_ElementDisplay.BackgroundColor3 = CurrentColor
                 pcall(ColorPickerArgs.OnChanged, CurrentColor)
