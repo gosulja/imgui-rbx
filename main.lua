@@ -896,7 +896,7 @@ function main:Begin(PROPS)
 
             Radio_ElementItemButton.Name = "Radio_ElementItemButton"
             Radio_ElementItemButton.Parent = Radio_ElementItem
-            Radio_ElementItemButton.BackgroundColor3 = Color3.fromRGB(33, 33, 33)
+            Radio_ElementItemButton.BackgroundColor3 = Color3.fromRGB(41, 74, 122)
             Radio_ElementItemButton.BorderColor3 = Color3.fromRGB(27, 42, 53)
             Radio_ElementItemButton.BorderSizePixel = 0
             Radio_ElementItemButton.Size = UDim2.new(0, 20, 0, 20)
