@@ -798,70 +798,57 @@ function main:Begin(PROPS)
         Color_ElementName.TextXAlignment = Enum.TextXAlignment.Left
 
         local UIS = game:GetService("UserInputService")
-        local CurrentColor = ColorPickerArgs.DefaultColor or Color3.fromRGB(255, 255, 255)
-        
-        Color_ElementDisplay.BackgroundColor3 = CurrentColor
-        
-        local redDown, greenDown, blueDown = false, false, false
-        
-        Color_ElementRedButtonInput.MouseButton1Down:Connect(function()
-            redDown = true
-        end)
-        
-        Color_ElementGreenButtonInput.MouseButton1Down:Connect(function()
-            greenDown = true
-        end)
-        
-        Color_ElementBlueButtonInput.MouseButton1Down:Connect(function()
-            blueDown = true
-        end)
-        
-        Color_ElementRedButtonInput.MouseButton1Up:Connect(function()
-            redDown = false
-        end)
-        
-        Color_ElementGreenButtonInput.MouseButton1Up:Connect(function()
-            greenDown = false
-        end)
-        
-        Color_ElementBlueButtonInput.MouseButton1Up:Connect(function()
-            blueDown = false
-        end)
-        
-        UIS.InputChanged:Connect(function(input, gameProcessedEvent)
-            if redDown and input.UserInputType == Enum.UserInputType.MouseMovement then
-                local colorVector = Vector3.new(input.Position.X, input.Position.Y, 0)
-                local colorValue = math.floor(colorVector.X / Color_ElementRedButtonInput.AbsoluteSize.X * 255)
-                local newColor = Color3.fromRGB(colorValue, CurrentColor.G, CurrentColor.B)
-        
-                Color_ElementRedTextInput.Text = string.format("R:%s", tostring(colorValue));
-                Color_ElementDisplay.BackgroundColor3 = newColor
-                pcall(ColorPickerArgs.OnChanged, newColor)
-                CurrentColor = newColor
-            end
-        
-            if greenDown and input.UserInputType == Enum.UserInputType.MouseMovement then
-                local colorVector = Vector3.new(input.Position.X, input.Position.Y, 0)
-                local colorValue = math.floor(colorVector.X / Color_ElementGreenButtonInput.AbsoluteSize.X * 255)
-                local newColor = Color3.fromRGB(CurrentColor.R, colorValue, CurrentColor.B)
-        
-                Color_ElementGreenTextInput.Text = string.format("G:%s", tostring(colorValue));
-                Color_ElementDisplay.BackgroundColor3 = newColor
-                pcall(ColorPickerArgs.OnChanged, newColor)
-                CurrentColor = newColor
-            end
-        
-            if blueDown and input.UserInputType == Enum.UserInputType.MouseMovement then
-                local colorVector = Vector3.new(input.Position.X, input.Position.Y, 0)
-                local colorValue = math.floor(colorVector.X / Color_ElementBlueButtonInput.AbsoluteSize.X * 255)
-                local newColor = Color3.fromRGB(CurrentColor.R, CurrentColor.G, colorValue)
-        
-                Color_ElementBlueTextInput.Text = string.format("B:%s", tostring(colorValue));
-                Color_ElementDisplay.BackgroundColor3 = newColor
-                pcall(ColorPickerArgs.OnChanged, newColor)
-                CurrentColor = newColor
-            end
-        end)
+
+        -- Map of color button names to their corresponding text input and display elements
+        local colorElements = {
+            Red = {
+                ButtonInput = Color_ElementRedButtonInput,
+                TextInput = Color_ElementRedTextInput,
+                Display = Color_ElementDisplay
+            },
+            Green = {
+                ButtonInput = Color_ElementGreenButtonInput,
+                TextInput = Color_ElementGreenTextInput,
+                Display = Color_ElementDisplay
+            },
+            Blue = {
+                ButtonInput = Color_ElementBlueButtonInput,
+                TextInput = Color_ElementBlueTextInput,
+                Display = Color_ElementDisplay
+            }
+        }
+
+        -- Set up event listeners for each color button
+        for colorName, colorElement in pairs(colorElements) do
+            local currentColorValue = 255
+
+            colorElement.ButtonInput.MouseButton1Down:Connect(function()
+                while UIS:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) do
+                    -- Calculate slider value based on mouse position
+                    local sliderValue = math.clamp(UIS.MousePosition.X - colorElement.ButtonInput.AbsolutePosition.X, 1, 255)
+
+                    -- Update the text input and display elements
+                    colorElement.TextInput.Text = colorName .. ": " .. tostring(sliderValue)
+                    colorElement.Display.BackgroundColor3 = Color3.fromRGB(
+                        colorName == "Red" and sliderValue or currentColorValue,
+                        colorName == "Green" and sliderValue or currentColorValue,
+                        colorName == "Blue" and sliderValue or currentColorValue
+                    )
+
+                    -- Update the current color value
+                    if sliderValue ~= currentColorValue then
+                        currentColorValue = sliderValue
+                        -- Call a callback function if it exists
+                        if ColorPickerArgs and ColorPickerArgs.OnChanged then
+                            pcall(ColorPickerArgs.OnChanged, colorElement.Display.BackgroundColor3)
+                        end
+                    end
+
+                    wait()
+                end
+            end)
+        end
+
         
 
 
