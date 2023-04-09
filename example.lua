@@ -8,7 +8,7 @@ local Window = ImGui:Begin({
 
 local colorPicker = Window:ColorPicker3({
     Name = "Color picker 3",
-    DefaultColor = Color3.fromRGB(34, 89, 6),
+    DefaultColor = Color3.fromRGB(175, 25, 255),
     OnChanged = function(clr) 
         print(tostring(clr))
     end
