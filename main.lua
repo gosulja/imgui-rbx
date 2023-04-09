@@ -907,8 +907,8 @@ function main:Begin(PROPS)
 
             Radio_ElementItemButtonState.Name = "Radio_ElementItemButtonState"
             Radio_ElementItemButtonState.Parent = Radio_ElementItemButton
-            Radio_ElementItemButtonState.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-            Radio_ElementItemButtonState.BackgroundTransparency = 1.000
+            Radio_ElementItemButtonState.BackgroundColor3 = Color3.fromRGB(66, 120, 196)
+            Radio_ElementItemButtonState.BackgroundTransparency = 0
             Radio_ElementItemButtonState.BorderSizePixel = 0
             Radio_ElementItemButtonState.Position = UDim2.new(0.100000001, 0, 0.100000001, 0)
             Radio_ElementItemButtonState.Size = UDim2.new(0, 18, 0, 18)
@@ -943,8 +943,10 @@ function main:Begin(PROPS)
 
             if radio == Default then 
                 RadioEnabled = true
+                Radio_ElementItemButtonState.Visible = true;
             else
                 RadioEnabled = false
+                Radio_ElementItemButtonState.Visible = false;
             end
 
             local radioButton = {
