@@ -881,11 +881,36 @@ function main:Begin(PROPS)
             local Radio_ElementItemName = Instance.new("TextLabel")
             local RadioEnabled = false
 
+            Radio_Element.Name = "Radio_Element"
+            Radio_Element.Parent = WindowElements
+            Radio_Element.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            Radio_Element.BackgroundTransparency = 1.000
+            Radio_Element.Position = UDim2.new(0, 0, 0.49666667, 0)
+            Radio_Element.Size = UDim2.new(1, 0, 0, 23)
+
+            Radio_ElementItemName.Name = "Radio_ElementItemName"
+            Radio_ElementItemName.Parent = Radio_ElementItem
+            Radio_ElementItemName.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            Radio_ElementItemName.BackgroundTransparency = 1.000
+            Radio_ElementItemName.Position = UDim2.new(0.240384609, 0, 0, 0)
+            Radio_ElementItemName.Size = UDim2.new(0.644999981, 0, 1, 0)
+            Radio_ElementItemName.FontFace = GetFont()
+            Radio_ElementItemName.Text = radio
+            Radio_ElementItemName.TextColor3 = Color3.fromRGB(255, 255, 255)
+            Radio_ElementItemName.TextSize = 17.000
+            Radio_ElementItemName.TextXAlignment = Enum.TextXAlignment.Lefts
+
+            Radio_ElementLayout.Name = "Radio_ElementLayout"
+            Radio_ElementLayout.Parent = Radio_Element
+            Radio_ElementLayout.FillDirection = Enum.FillDirection.Horizontal
+            Radio_ElementLayout.SortOrder = Enum.SortOrder.LayoutOrder
+            Radio_ElementLayout.Padding = UDim.new(0, 7)
+
             Radio_ElementItem.Name = "Radio_ElementItem"
             Radio_ElementItem.Parent = Radio_Element
             Radio_ElementItem.BackgroundColor3 = Color3.fromRGB(41, 74, 122)
             Radio_ElementItem.BackgroundTransparency = 1.000
-            Radio_ElementItem.Size = UDim2.new(0, 104, 1, 0)
+            Radio_ElementItem.Size = UDim2.new(0, 23 + (Radio_ElementItemName.TextBounds.X), 1, 0)
 
             Radio_ElementItemLayout.Name = "Radio_ElementItemLayout"
             Radio_ElementItemLayout.Parent = Radio_ElementItem
@@ -897,49 +922,32 @@ function main:Begin(PROPS)
             Radio_ElementItemButton.Name = "Radio_ElementItemButton"
             Radio_ElementItemButton.Parent = Radio_ElementItem
             Radio_ElementItemButton.BackgroundColor3 = Color3.fromRGB(41, 74, 122)
-            Radio_ElementItemButton.BorderColor3 = Color3.fromRGB(27, 42, 53)
-            Radio_ElementItemButton.BorderSizePixel = 0
-            Radio_ElementItemButton.Size = UDim2.new(0, 20, 0, 20)
+            Radio_ElementItemButton.Size = UDim2.new(0, 18, 0, 18)
 
+            Radio_ElementItemButtonCorner.CornerRadius = UDim.new(1, 0)
             Radio_ElementItemButtonCorner.Name = "Radio_ElementItemButtonCorner"
             Radio_ElementItemButtonCorner.Parent = Radio_ElementItemButton
-            Radio_ElementItemButtonCorner.CornerRadius = UDim.new(1, 0)
 
             Radio_ElementItemButtonState.Name = "Radio_ElementItemButtonState"
             Radio_ElementItemButtonState.Parent = Radio_ElementItemButton
+            Radio_ElementItemButtonState.AnchorPoint = Vector2.new(0.5, 0.5)
             Radio_ElementItemButtonState.BackgroundColor3 = Color3.fromRGB(66, 120, 196)
-            Radio_ElementItemButtonState.BackgroundTransparency = 0
-            Radio_ElementItemButtonState.BorderSizePixel = 0
-            Radio_ElementItemButtonState.Position = UDim2.new(0.100000001, 0, 0.100000001, 0)
-            Radio_ElementItemButtonState.Size = UDim2.new(0, 18, 0, 18)
+            Radio_ElementItemButtonState.Position = UDim2.new(0.5, 0, 0.5, 0)
+            Radio_ElementItemButtonState.Size = UDim2.new(0, 14, 0, 14)
 
+            Radio_ElementItemButtonStateCorner.CornerRadius = UDim.new(1, 0)
             Radio_ElementItemButtonStateCorner.Name = "Radio_ElementItemButtonStateCorner"
             Radio_ElementItemButtonStateCorner.Parent = Radio_ElementItemButtonState
-            Radio_ElementItemButtonStateCorner.CornerRadius = UDim.new(1, 0)
 
             Radio_ElementItemButtonInput.Name = "Radio_ElementItemButtonInput"
             Radio_ElementItemButtonInput.Parent = Radio_ElementItemButton
             Radio_ElementItemButtonInput.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
             Radio_ElementItemButtonInput.BackgroundTransparency = 1.000
-            Radio_ElementItemButtonInput.BorderSizePixel = 0
-            Radio_ElementItemButtonInput.Position = UDim2.new(0, 0, 0, 0)
             Radio_ElementItemButtonInput.Size = UDim2.new(1, 0, 1, 0)
             Radio_ElementItemButtonInput.FontFace = GetFont()
             Radio_ElementItemButtonInput.Text = ""
             Radio_ElementItemButtonInput.TextColor3 = Color3.fromRGB(0, 0, 0)
             Radio_ElementItemButtonInput.TextSize = 14.000
-
-            Radio_ElementItemName.Name = "Radio_ElementItemName"
-            Radio_ElementItemName.Parent = Radio_ElementItem
-            Radio_ElementItemName.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-            Radio_ElementItemName.BackgroundTransparency = 1.000
-            Radio_ElementItemName.Position = UDim2.new(0.259615391, 0, 0.100000001, 0)
-            Radio_ElementItemName.Size = UDim2.new(0.740384638, 0, 0.800000012, 0)
-            Radio_ElementItemName.FontFace = GetFont()
-            Radio_ElementItemName.Text = radio
-            Radio_ElementItemName.TextColor3 = Color3.fromRGB(255, 255, 255)
-            Radio_ElementItemName.TextSize = 14.000
-            Radio_ElementItemName.TextXAlignment = Enum.TextXAlignment.Left
 
             if radio == Default then 
                 RadioEnabled = true
