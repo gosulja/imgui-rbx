@@ -240,7 +240,7 @@ function main:Begin(PROPS)
 
         local size = box.TextBounds.X
         
-        if game:IsLoaded() then box.Size = UDim2.new(0, size, 0, 23) end
+        if game:IsLoaded() then box.Size = UDim2.new(0, size + 10, 0, 23) end
 
         return OnClick
     end
