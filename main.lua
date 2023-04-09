@@ -798,57 +798,37 @@ function main:Begin(PROPS)
         Color_ElementName.TextXAlignment = Enum.TextXAlignment.Left
 
         local UIS = game:GetService("UserInputService")
-        local CurrentColor = ColorPickerArgs.DefaultColor or Color3.fromRGB(255, 255, 255)
+        local CurrentColor = Color3.fromRGB(255, 255, 255)
 
-        Color_ElementDisplay.BackgroundColor3 = CurrentColor
-
-        local function updateColor()
-            local newColor = Color3.fromRGB(
-                math.floor(Color_ElementRedButtonInput.AbsolutePosition.X / Color_ElementRedButtonInput.AbsoluteSize.X * 255 + 0.5),
-                math.floor(Color_ElementGreenButtonInput.AbsolutePosition.X / Color_ElementGreenButtonInput.AbsoluteSize.X * 255 + 0.5),
-                math.floor(Color_ElementBlueButtonInput.AbsolutePosition.X / Color_ElementBlueButtonInput.AbsoluteSize.X * 255 + 0.5)
-            )
-
-            Color_ElementDisplay.BackgroundColor3 = newColor
-            pcall(ColorPickerArgs.OnChanged, newColor)
+        local function setColor()
+            Color_ElementDisplay.BackgroundColor3 = CurrentColor
+            pcall(ColorPickerArgs.OnChanged, CurrentColor)
         end
 
-        Color_ElementRedButtonInput.MouseButton1Down:Connect(function()
-            while UIS:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) do
-                local mousePosition = UIS:GetMouseLocation()
-                local relativePosition = mousePosition.X - Color_ElementRedButtonInput.AbsolutePosition.X
-                relativePosition = math.clamp(relativePosition, 0, Color_ElementRedButtonInput.AbsoluteSize.X)
-                Color_ElementRedButtonInput.Size = UDim2.new(0, relativePosition, 1, 0)
-                updateColor()
-                wait()
+        local function updateColor(color, value)
+            if color == "R" then
+                CurrentColor = Color3.fromRGB(value, CurrentColor.G, CurrentColor.B)
+            elseif color == "G" then
+                CurrentColor = Color3.fromRGB(CurrentColor.R, value, CurrentColor.B)
+            elseif color == "B" then
+                CurrentColor = Color3.fromRGB(CurrentColor.R, CurrentColor.G, value)
             end
-        end)
+            setColor()
+        end
 
-        Color_ElementGreenButtonInput.MouseButton1Down:Connect(function()
-            while UIS:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) do
-                local mousePosition = UIS:GetMouseLocation()
-                local relativePosition = mousePosition.X - Color_ElementGreenButtonInput.AbsolutePosition.X
-                relativePosition = math.clamp(relativePosition, 0, Color_ElementGreenButtonInput.AbsoluteSize.X)
-                Color_ElementGreenButtonInput.Size = UDim2.new(0, relativePosition, 1, 0)
-                updateColor()
-                wait()
+        for _, colorButton in pairs(Color_Element:GetDescendants()) do
+            if colorButton:IsA("TextButton") then
+                colorButton.MouseButton1Down:Connect(function()
+                    while UIS:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) do
+                        local x = math.clamp(UIS:GetMouseLocation().X - colorButton.AbsolutePosition.X, 0, colorButton.AbsoluteSize.X)
+                        local value = math.floor(x / colorButton.AbsoluteSize.X * 255 + 0.5)
+                        local color = string.sub(colorButton.Name, 14, 14)
+                        updateColor(color, value)
+                        wait()
+                    end
+                end)
             end
-        end)
-
-        Color_ElementBlueButtonInput.MouseButton1Down:Connect(function()
-            while UIS:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) do
-                local mousePosition = UIS:GetMouseLocation()
-                local relativePosition = mousePosition.X - Color_ElementBlueButtonInput.AbsolutePosition.X
-                relativePosition = math.clamp(relativePosition, 0, Color_ElementBlueButtonInput.AbsoluteSize.X)
-                Color_ElementBlueButtonInput.Size = UDim2.new(0, relativePosition, 1, 0)
-                updateColor()
-                wait()
-            end
-        end)
-
-
-        
-
+        end
 
 
     end
