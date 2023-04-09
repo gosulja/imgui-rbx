@@ -819,15 +819,16 @@ function main:Begin(PROPS)
             setColor()
         end
 
+        setColor()
+
         for _, colorButton in pairs(Color_Element:GetDescendants()) do
             if colorButton:IsA("TextButton") then
                 colorButton.MouseButton1Down:Connect(function()
                     while UIS:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) do
-                        local r = math.floor(Color_ElementRedButtonInput.AbsolutePosition.X / Color_ElementRedButtonInput.AbsoluteSize.X * 255)
-                        local g = math.floor(Color_ElementGreenButtonInput.AbsolutePosition.X / Color_ElementGreenButtonInput.AbsoluteSize.X * 255)
-                        local b = math.floor(Color_ElementBlueButtonInput.AbsolutePosition.X / Color_ElementBlueButtonInput.AbsoluteSize.X * 255)
-                        CurrentColor = Color3.fromRGB(r, g, b)
-                        setColor()
+                        local x = math.clamp(UIS:GetMouseLocation().X - colorButton.AbsolutePosition.X, 0, colorButton.AbsoluteSize.X)
+                        local value = math.floor(x / colorButton.AbsoluteSize.X * 255 + 0.5)
+                        local color = string.sub(colorButton.Name, 14, 14)
+                        updateColor(color, value)
                         task.wait()
                     end
                 end)
