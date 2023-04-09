@@ -798,11 +798,13 @@ function main:Begin(PROPS)
                 WindowPanelIcon.ImageTransparency = 0.3
                 Window.BackgroundTransparency = 1
                 ResizeAll.Visible = false
+                MinimiseButtonIcon.Rotation = 180
             else
                 WindowElementContainer.Visible = true
                 WindowPanelIcon.ImageTransparency = 0
                 Window.BackgroundTransparency = 0.05
                 ResizeAll.Visible = true
+                MinimiseButtonIcon.Rotation = 0
             end
             
         end)
