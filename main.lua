@@ -593,7 +593,7 @@ function main:Begin(PROPS)
         CheckBox_ElementBoxInput.BackgroundTransparency = 1.000
         CheckBox_ElementBoxInput.Position = UDim2.new(0.5, 0, 0.5, 0)
         CheckBox_ElementBoxInput.Size = UDim2.new(1, 0, 1, 0)
-        CheckBox_ElementBoxInput.Font = GetFont()
+        CheckBox_ElementBoxInput.FontFace = GetFont()
         CheckBox_ElementBoxInput.Text = ""
         CheckBox_ElementBoxInput.TextColor3 = Color3.fromRGB(0, 0, 0)
         CheckBox_ElementBoxInput.TextSize = 14.000
