@@ -813,11 +813,11 @@ function main:Begin(PROPS)
             setColor()
         end
 
-        Color_ElementRedTextInput.Text = string.format("R:%.0f", CurrentColor.R);
-        Color_ElementGreenTextInput.Text = string.format("G:%.0f", CurrentColor.G);
-        Color_ElementBlueTextInput.Text = string.format("B:%.0f", CurrentColor.B);
-
         setColor()
+
+        Color_ElementRedTextInput.Text = string.format("R:%.0f", Color_ElementDisplay.BackgroundColor3.R);
+        Color_ElementGreenTextInput.Text = string.format("G:%.0f", Color_ElementDisplay.BackgroundColor3.G);
+        Color_ElementBlueTextInput.Text = string.format("B:%.0f", Color_ElementDisplay.BackgroundColor3.B);
 
         for _, colorButton in pairs(Color_Element:GetDescendants()) do
             if colorButton:IsA("TextButton") then
