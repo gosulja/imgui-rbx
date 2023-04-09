@@ -42,6 +42,7 @@ local Slider = Window:SliderFloat({
     Name = "Slider float example",
     Min = 0,
     Max = 1000,
+    Default = 500,
     OnChanged = function(val) 
         print(string.format("Value changed to: %s", tostring(val)))
     end
@@ -52,6 +53,7 @@ local Slider = Window:SliderInteger({
     Name = "Slider integer example",
     Min = 0,
     Max = 1000,
+    Default = 500,
     OnChanged = function(val) 
         print(string.format("Value changed to: %s", tostring(val)))
     end
