@@ -10,6 +10,19 @@ Resizing feature (gyazo made it look buggy)
 
 ![](https://user-images.githubusercontent.com/111649405/230788331-c3af0e11-5ac7-4fdb-8a85-427b66f63232.gif)
 
+# Progress
+
+| Element Type              | Added | Functional | Bugs (?)             |
+|---------------------------|-------|------------|----------------------|
+| Text / Label              | true  | true       | none                 |
+| Checkbox / Toggle         | true  | true       | none                 |
+| Slider/s (Integer, Float) | true  | semi       | numbers not rounding |
+| Input Text                | true  | true       | none                 |
+| Plot Lines                | false | false      | none                 |
+| Menu Bar                  | false | false      | none                 |
+| Color Picker              | false | false      | none                 |
+| Text Colored              | false | false      | none                 |
+
 
 # Documentation
 ```lua
