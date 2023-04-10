@@ -55,6 +55,9 @@ end
 ```
 Things like this will be implemented.
 
+# Todo
+Fix up code, make it more clean and readable.
+
 
 # Documentation
 ```lua
