@@ -6,7 +6,7 @@ local Window = ImGui:Begin({
     Height = 400
 })
 
-Window:Title("Test, hello 123");
+Window:Text("Test, hello 123");
 
 Window:Seperator();
 
