@@ -1009,17 +1009,12 @@ function main:Begin(PROPS)
     function ElementHandler:SinWaveGraph(SinWaveGraphArgs) 
         local SinWaveGraph_Element = Instance.new("Frame")
         local SinWaveGraph_ElementLayout = Instance.new("UIListLayout")
-        local SinWaveGraph_ElementAnimationCheckbox = Instance.new("Frame")
-        local SinWaveGraph_ElementAnimationCheckboxInput = Instance.new("TextButton")
-        local SinWaveGraph_ElementAnimationCheckboxImage = Instance.new("ImageLabel")
-        local SinWaveGraph_ElementAnimationCheckboxName = Instance.new("TextLabel")
         local SinWaveGraph_ElementDisplay = Instance.new("Frame")
         local SinWaveGraph_ElementDisplayName = Instance.new("TextLabel")
 
         local Value = SinWaveGraphArgs.Value
         local MaxHeight = SinWaveGraphArgs.MaxHeight
         local Frequency = SinWaveGraphArgs.Frequency
-        local Animating = true
 
         SinWaveGraph_Element.Name = "SinWaveGraph_Element"
         SinWaveGraph_Element.Parent = WindowElements
@@ -1033,57 +1028,19 @@ function main:Begin(PROPS)
         SinWaveGraph_ElementLayout.SortOrder = Enum.SortOrder.LayoutOrder
         SinWaveGraph_ElementLayout.Padding = UDim.new(0, 10)
 
-        SinWaveGraph_ElementAnimationCheckbox.Name = "SinWaveGraph_ElementAnimationCheckbox"
-        SinWaveGraph_ElementAnimationCheckbox.Parent = SinWaveGraph_Element
-        SinWaveGraph_ElementAnimationCheckbox.BackgroundColor3 = Color3.fromRGB(36, 65, 106)
-        SinWaveGraph_ElementAnimationCheckbox.BorderColor3 = Color3.fromRGB(74, 74, 83)
-        SinWaveGraph_ElementAnimationCheckbox.Size = UDim2.new(0, 22, 0, 22)
-
-        SinWaveGraph_ElementAnimationCheckboxInput.Name = "SinWaveGraph_ElementAnimationCheckboxInput"
-        SinWaveGraph_ElementAnimationCheckboxInput.Parent = SinWaveGraph_ElementAnimationCheckbox
-        SinWaveGraph_ElementAnimationCheckboxInput.AnchorPoint = Vector2.new(0.5, 0.5)
-        SinWaveGraph_ElementAnimationCheckboxInput.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-        SinWaveGraph_ElementAnimationCheckboxInput.BackgroundTransparency = 1.000
-        SinWaveGraph_ElementAnimationCheckboxInput.Position = UDim2.new(0.5, 0, 0.5, 0)
-        SinWaveGraph_ElementAnimationCheckboxInput.Size = UDim2.new(1, 0, 1, 0)
-        SinWaveGraph_ElementAnimationCheckboxInput.FontFace = GetFont()
-        SinWaveGraph_ElementAnimationCheckboxInput.Text = ""
-        SinWaveGraph_ElementAnimationCheckboxInput.TextColor3 = Color3.fromRGB(0, 0, 0)
-        SinWaveGraph_ElementAnimationCheckboxInput.TextSize = 14.000
-
-        SinWaveGraph_ElementAnimationCheckboxImage.Name = "SinWaveGraph_ElementAnimationCheckboxImage"
-        SinWaveGraph_ElementAnimationCheckboxImage.Parent = SinWaveGraph_ElementAnimationCheckbox
-        SinWaveGraph_ElementAnimationCheckboxImage.AnchorPoint = Vector2.new(0.5, 0.5)
-        SinWaveGraph_ElementAnimationCheckboxImage.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-        SinWaveGraph_ElementAnimationCheckboxImage.BackgroundTransparency = 1.000
-        SinWaveGraph_ElementAnimationCheckboxImage.Position = UDim2.new(0.5, 0, 0.5, 0)
-        SinWaveGraph_ElementAnimationCheckboxImage.Size = UDim2.new(0, 16, 0, 16)
-        SinWaveGraph_ElementAnimationCheckboxImage.Image = "rbxassetid://13058405207"
-
-        SinWaveGraph_ElementAnimationCheckboxName.Name = "SinWaveGraph_ElementAnimationCheckboxName"
-        SinWaveGraph_ElementAnimationCheckboxName.Parent = SinWaveGraph_ElementAnimationCheckbox
-        SinWaveGraph_ElementAnimationCheckboxName.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-        SinWaveGraph_ElementAnimationCheckboxName.BackgroundTransparency = 1.000
-        SinWaveGraph_ElementAnimationCheckboxName.Position = UDim2.new(0, 35, 0, 0)
-        SinWaveGraph_ElementAnimationCheckboxName.Size = UDim2.new(1, 0, 0, 20)
-        SinWaveGraph_ElementAnimationCheckboxName.FontFace = GetFont()
-        SinWaveGraph_ElementAnimationCheckboxName.Text = "Animate"
-        SinWaveGraph_ElementAnimationCheckboxName.TextColor3 = Color3.fromRGB(255, 255, 255)
-        SinWaveGraph_ElementAnimationCheckboxName.TextSize = 17.000
-        SinWaveGraph_ElementAnimationCheckboxName.TextXAlignment = Enum.TextXAlignment.Left
-
         SinWaveGraph_ElementDisplay.Name = "SinWaveGraph_ElementDisplay"
         SinWaveGraph_ElementDisplay.Parent = SinWaveGraph_Element
         SinWaveGraph_ElementDisplay.BackgroundColor3 = Color3.fromRGB(41, 74, 122)
         SinWaveGraph_ElementDisplay.BorderColor3 = Color3.fromRGB(74, 74, 83)
         SinWaveGraph_ElementDisplay.Position = UDim2.new(0, 0, 0.423953384, 0)
         SinWaveGraph_ElementDisplay.Size = UDim2.new(0.370000005, 0, 0, 60)
+        SinWaveGraph_ElementDisplay.ClipsDescendants = true
 
         SinWaveGraph_ElementDisplayName.Name = "SinWaveGraph_ElementDisplayName"
-        SinWaveGraph_ElementDisplayName.Parent = SinWaveGraph_ElementDisplay
+        SinWaveGraph_ElementDisplayName.Parent = SinWaveGraph_Element
         SinWaveGraph_ElementDisplayName.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
         SinWaveGraph_ElementDisplayName.BackgroundTransparency = 1.000
-        SinWaveGraph_ElementDisplayName.Position = UDim2.new(0, (SinWaveGraph_ElementDisplay.Size.X.Scale + 15), 0, 20)
+        SinWaveGraph_ElementDisplayName.Position = UDim2.new(0, (SinWaveGraph_ElementDisplay.Size.X + 15), 0, 20)
         SinWaveGraph_ElementDisplayName.Size = UDim2.new(1, 0, 0, 20)
         SinWaveGraph_ElementDisplayName.FontFace = GetFont()
         SinWaveGraph_ElementDisplayName.Text = SinWaveGraphArgs.Name
@@ -1091,20 +1048,8 @@ function main:Begin(PROPS)
         SinWaveGraph_ElementDisplayName.TextSize = 17.000
         SinWaveGraph_ElementDisplayName.TextXAlignment = Enum.TextXAlignment.Left
 
-        local function UpdateToggle() 
-            if Animating then 
-                SinWaveGraph_ElementAnimationCheckboxImage.Visible = true
-            else
-                SinWaveGraph_ElementAnimationCheckboxImage.Visible = false
-            end
-        end
-
-        UpdateToggle()
-
-        SinWaveGraph_ElementAnimationCheckboxInput.MouseButton1Click:Connect(function()
-            Animating = not Animating
-
-            UpdateToggle()
+        SinWaveGraph_ElementDisplay:GetPropertyChangedSignal("Size"):Connect(function()
+            SinWaveGraph_ElementDisplayName.Position = UDim2.new(0, (SinWaveGraph_ElementDisplay.Size.X + 15), 0, 20)
         end)
 
         local trail = Instance.new("Folder")
@@ -1124,11 +1069,7 @@ function main:Begin(PROPS)
                 local y = math.sin(i/200*math.pi*2*frequency + value)*20 + 25
                 y = math.clamp(y, 0, maxHeight)
 
-                if Animating then 
-                    point.Position = UDim2.new((i-1)/200, 0, y/50, 0)
-                else
-                    point.Visible = false
-                end
+                point.Position = UDim2.new((i-1)/200, 0, y/50, 0)
             end
             return value
         end
