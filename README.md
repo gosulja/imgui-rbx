@@ -28,6 +28,7 @@ Final Example
 ![](https://user-images.githubusercontent.com/111649405/230902091-64b606ad-ff28-4b1e-8021-7617dee9dab1.gif)
 
 ## Current Theme: Legacy (More will be added soon)
+Some info on themes: Themes will have different components and styles, for example there will be rounded elements and boxxed elements, and there will be custom themes and light themes for ImGui-RBX
 
 # Progress
 
