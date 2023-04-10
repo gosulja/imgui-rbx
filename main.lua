@@ -198,7 +198,6 @@ function main:Begin(PROPS)
 
     function ElementHandler:Text(TextDisplay) 
         local Label_Element = Instance.new("TextLabel")
-
         Label_Element.Name = "Label_Element"
         Label_Element.Parent = WindowElements
         Label_Element.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -231,6 +230,8 @@ function main:Begin(PROPS)
         Button_ElementPadding.Parent = Button_Element
         Button_ElementPadding.PaddingLeft = UDim.new(0, 6)
         Button_ElementPadding.PaddingRight = UDim.new(0, 6)
+
+        Button_Element.MouseButton1Click:Connect(function() return true end)
 
         function OnClick:Connect(Function) 
             Button_Element.MouseButton1Click:Connect(Function)
@@ -298,7 +299,7 @@ function main:Begin(PROPS)
 
         TextBox_ElementInput.FocusLost:Connect(function(enterPressed, inputThatCausedFocusLoss)
             if enterPressed then
-                pcall(InputTextOptions.Callback, TextBox_ElementInput.Text)
+                pcall(InputTextOptions.OnEnter, TextBox_ElementInput.Text)
             end
         end)
                 
@@ -631,8 +632,10 @@ function main:Begin(PROPS)
                 
         if Enabled then
             CheckBox_ElementImage.Visible = true
+            pcall(CheckBoxOptions.OnChanged, Enabled)
         else
             CheckBox_ElementImage.Visible = false
+            pcall(CheckBoxOptions.OnChanged, Enabled)
         end
 
         CheckBox_ElementBoxInput.MouseButton1Click:Connect(function()
@@ -975,7 +978,7 @@ function main:Begin(PROPS)
                 if not radioButton.Enabled then  -- only do something if the button is not already selected
                     radioButton.Enabled = true
                     radioButton.Update()
-                    pcall(RadioButtonsArgs.OnChanged, radioButton.Enabled)
+                    pcall(RadioButtonsArgs.OnChanged, radioButton.Name, radioButton.Enabled)
                     for _, rad in pairs(RadioButtons) do 
                         if rad ~= radioButton then  -- deselect other buttons
                             rad.Enabled = false
