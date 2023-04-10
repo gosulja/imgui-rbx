@@ -1008,7 +1008,6 @@ function main:Begin(PROPS)
         
     end
 
-    -- Handle the resize feature
     local TweenService = game:GetService("TweenService")
     local UserInputService = game:GetService("UserInputService")
     
@@ -1017,7 +1016,6 @@ function main:Begin(PROPS)
     local corner = ResizeAll
     local debounce = false
     
-    -- update initial position of the corner
     local function updateInitialPosition()
         local initialPosition = UDim2.new(1, -(corner.AbsoluteSize.X - 10), 1, -(corner.AbsoluteSize.Y - 10) + 0.1)
         local tweenInfo = TweenInfo.new(0.01, Enum.EasingStyle.Quint, Enum.EasingDirection.Out)
@@ -1040,11 +1038,9 @@ function main:Begin(PROPS)
         local cornerWidth = corner.AbsoluteSize.X
         local cornerHeight = corner.AbsoluteSize.Y
     
-        -- calculate new size
         local newWidth = math.max((mousePos.X - windowLeft + (cornerWidth / 2)), 35)
         local newHeight = math.max(((mousePos.Y - windowTop + (cornerHeight / 2)) - 35), 35)
     
-        -- update window size
         local tweenInfo = TweenInfo.new(0.01, Enum.EasingStyle.Quint, Enum.EasingDirection.Out)
         local resizeTween = TweenService:Create(window, tweenInfo, {
             Size = UDim2.new(0, newWidth, 0, newHeight)
@@ -1073,7 +1069,6 @@ function main:Begin(PROPS)
         end
     end)
     
-    -- update corner position when window is resized
     window:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
         updateInitialPosition()
     end)
@@ -1082,28 +1077,23 @@ function main:Begin(PROPS)
     local TweenService = game:GetService("TweenService")
     local UserInputService = game:GetService("UserInputService")
     
-    -- Get objects
     local window = Window
     local topPanel = WindowPanel
     
-    -- Variables
     local dragging = false
     local dragInput = nil
     local dragStart = nil
     local startPos = nil
     
-    -- Functions
     local function updateDrag(input)
         local delta = input.Position - dragStart
         local newPosition = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
     
-        -- Tween to new position
         local tweenInfo = TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
         local tween = TweenService:Create(window, tweenInfo, { Position = newPosition })
         tween:Play()
     end
     
-    -- Events
     topPanel.InputBegan:Connect(function(input)
         if input.UserInputType == Enum.UserInputType.MouseButton1 then
             dragging = true
@@ -1175,7 +1165,6 @@ function main:Begin(PROPS)
     
             WindowElements.CanvasSize = UDim2.new(0, 0, 0, 0)
             
-            -- Calculate the total height of the children
             local totalHeight = 0
             for _, child in ipairs(children) do
                 if child:IsA("GuiObject") then
@@ -1183,9 +1172,7 @@ function main:Begin(PROPS)
                 end
             end
             
-            -- Check if the total height of the children is greater than the height of the ScrollableFrame
             if totalHeight > WindowElements.AbsoluteSize.Y then
-                -- Set the CanvasSize of the ScrollableFrame to fit all the children
                 local padding = 0
                 padding = WindowElementsContainerLayout.Padding.Offset
                 WindowElements.CanvasSize = UDim2.new(0, 0, 0, totalHeight + padding)
