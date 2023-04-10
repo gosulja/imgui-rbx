@@ -39,6 +39,18 @@ Radio Toggle Example
 | Text Colored              | false | false      | none                 |
 
 
+# Information 
+To make it feel more like ImGui,
+creating and handling elements will be very similar to ImGui in C++.
+For example, handling and creating a button
+```lua
+if (Window:Button("Hello")) then 
+    My_function();
+end
+```
+Things like this will be implemented.
+
+
 # Documentation
 ```lua
 local ImGui = loadstring(game:HttpGet("https://raw.githubusercontent.com/wiIlow/imgui-rbx/main/main.lua", true))()
