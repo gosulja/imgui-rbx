@@ -1,4 +1,4 @@
-local ImGui = loadstring(game:HttpGet("https://haste.powercord.dev/raw/zixulaqeve", true))()
+local ImGui = loadstring(game:HttpGet("https://haste.powercord.dev/raw/epebiquwab", true))()
 
 local Window = ImGui:Begin({
     Name = "ImGui RBX Example",
@@ -82,6 +82,7 @@ Window:RadioButtons({
 Window:Seperator();
 
 Window:SinWaveGraph({
+    Name = "sin wave graph",
     Value = 10,
     MaxHeight = 60,
     Frequency = 1,
