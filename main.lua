@@ -1015,8 +1015,7 @@ function main:Begin(PROPS)
         local SinWaveGraph_ElementAnimationCheckboxName = Instance.new("TextLabel")
         local SinWaveGraph_ElementDisplay = Instance.new("Frame")
         local SinWaveGraph_ElementDisplayName = Instance.new("TextLabel")
-
-        local Name = SinWaveGraphArgs.Name
+        
         local Value = SinWaveGraphArgs.Value
         local MaxHeight = SinWaveGraphArgs.MaxHeight
         local Frequency = SinWaveGraphArgs.Frequency
@@ -1087,7 +1086,7 @@ function main:Begin(PROPS)
         SinWaveGraph_ElementDisplayName.Position = UDim2.new(0, 212, 0, 20)
         SinWaveGraph_ElementDisplayName.Size = UDim2.new(1, 0, 0, 20)
         SinWaveGraph_ElementDisplayName.FontFace = GetFont()
-        SinWaveGraph_ElementDisplayName.Text = Name
+        SinWaveGraph_ElementDisplayName.Text = SinWaveGraphArgs.Name
         SinWaveGraph_ElementDisplayName.TextColor3 = Color3.fromRGB(255, 255, 255)
         SinWaveGraph_ElementDisplayName.TextSize = 17.000
         SinWaveGraph_ElementDisplayName.TextXAlignment = Enum.TextXAlignment.Left
