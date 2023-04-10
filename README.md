@@ -116,7 +116,7 @@ local CheckBox = Window:CheckBox({
     end
 })
 
--- THIS IS NEEDED, it runs all functions which need to be executed last
+-- THIS IS NEEDED, it runs all functions which need to be executed last, will probably be deprecated in later versions
 Window:End()       
 ```
 
