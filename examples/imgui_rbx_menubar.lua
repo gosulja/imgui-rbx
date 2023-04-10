@@ -1,3 +1,5 @@
+-- This is very buggy and shouldn't be used yet
+
 local ImGui = loadstring(game:HttpGet("https://raw.githubusercontent.com/wiIlow/imgui-rbx/main/main.lua", true))()
 
 local Window = ImGui:Begin({
