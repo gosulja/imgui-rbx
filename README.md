@@ -21,6 +21,10 @@ Radio Toggle Example
 ![](https://user-images.githubusercontent.com/111649405/230799997-33fad637-3ed8-45ef-be07-4aaa7fa8132f.gif)
 
 
+Final Example
+
+![](https://user-images.githubusercontent.com/111649405/230902091-64b606ad-ff28-4b1e-8021-7617dee9dab1.gif)
+
 ## Current Theme: Legacy (More will be added soon)
 
 # Progress
@@ -33,6 +37,7 @@ Radio Toggle Example
 | Slider/s (Integer, Float) | true  | semi       | none                 |
 | Seperator                 | true  | true       | none                 |
 | Color Picker              | true  | true       | added logic, fixings |
+| Radio Toggles             | true  | true       | none                 |
 | Input Text                | true  | true       | none                 |
 | Plot Lines                | false | false      | none                 |
 | Menu Bar                  | false | false      | none                 |
@@ -49,6 +54,9 @@ if (Window:Button("Hello")) then
 end
 ```
 Things like this will be implemented.
+
+# Todo
+Fix up code, make it more clean and readable.
 
 
 # Documentation
