@@ -11,7 +11,7 @@ Window:Text("Test, hello 123");
 Window:Seperator();
 
 local i = 0
-Window:Button("Button"):OnClick(function()
+Window:Button("Button"):Connect(function()
     i += 1
     print(i)
 end)
