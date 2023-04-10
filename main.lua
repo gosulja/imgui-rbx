@@ -31,18 +31,18 @@ function main:Begin(PROPS)
 
     local function SecureGui(gui_element)
         if syn.protect_gui then 
-            syn.protect_gui(gui_element)
-            gui_element.Parent = game:GetService("CoreGui")
+            syn.protect_gui(gui_element)                                                    -- if syn then cool
+            gui_element.Parent = game:GetService("CoreGui")                                 
         elseif gethui then
-            gui_element.Parent = gethui()
+            gui_element.Parent = gethui()  
         else
-            error("Cannot secure GUI, it's unsafe to continue.");
-            gui_element.Parent = game:GetService("Players").LocalPlayer.PlayerGui
+            error("Cannot secure GUI, it's unsafe to continue.");                           -- just get a better executor
+            gui_element.Parent = game:GetService("Players").LocalPlayer.PlayerGui           -- please
         end
     end
 
     local function GetFont() 
-        return Font.fromId(12187374954)
+        return Font.fromId(12187374954)                                                     -- FiraSans, will add custom soon.
     end
 
     local ImGui = Instance.new("ScreenGui")
@@ -63,12 +63,12 @@ function main:Begin(PROPS)
     local WindowElementsPadding = Instance.new("UIPadding")
     
     local WindowElementsContainerLayout = Instance.new("UIListLayout")
-    local AWindowSep = Instance.new("Frame")
+    local AWindowSep = Instance.new("Frame")        -- Will stop the window elements from overflowing upwards.
 
     ImGui.Name = string.format("ImGui-%s", tostring(util:egg(tostring(game:GetService("Players").LocalPlayer.UserId))))
     ImGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
     ImGui.ResetOnSpawn = false
-    SecureGui(ImGui)
+    SecureGui(ImGui)                                -- Secure the ScreenGui from any attacks.
 
     Window.Name = "Window"
     Window.Parent = ImGui
