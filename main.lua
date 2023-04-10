@@ -1103,6 +1103,8 @@ function main:Begin(PROPS)
         MenuBarLayout.FillDirection = Enum.FillDirection.Horizontal
         MenuBarLayout.SortOrder = Enum.SortOrder.LayoutOrder
 
+        local currentlyOpen = false
+
         function ElementHandler:BeginMenu(MenuName) 
             local MenuBarItem = Instance.new("TextButton")
 
@@ -1110,11 +1112,17 @@ function main:Begin(PROPS)
             MenuBarItem.Parent = MenuBar
             MenuBarItem.BackgroundColor3 = Color3.fromRGB(44, 46, 48)
             MenuBarItem.BorderSizePixel = 0
-            MenuBarItem.Size = UDim2.new(-0.0895390064, 100, 1, 0)
+            MenuBarItem.Size = UDim2.new(0, (MenuBarItem.TextBounds.X + 5), 1, 0)
             MenuBarItem.FontFace = GetFont()
             MenuBarItem.Text = MenuName
             MenuBarItem.TextColor3 = Color3.fromRGB(255, 255, 255)
             MenuBarItem.TextSize = 17.000
+
+            local Open = false
+
+            MenuBarItem.MouseButton1Click:Connect(function()
+                Open = not Open
+            end)
 
             function ElementHandler:MenuItem(ItemProperties) 
 
@@ -1132,6 +1140,11 @@ function main:Begin(PROPS)
                 MenuBarItem_Items.BorderColor3 = Color3.fromRGB(74, 74, 83)
                 MenuBarItem_Items.Position = UDim2.new(0, 0, 1, 1)
                 MenuBarItem_Items.Size = UDim2.new(0, 100, 0, 23)
+                MenuBarItem_Items.Visible = Open
+
+                local function Update() 
+                    MenuBarItem_Items.Visible = Open
+                end
 
                 MenuBarItem_Items_2.Name = "MenuBarItem_Items"
                 MenuBarItem_Items_2.Parent = MenuBarItem_Items
@@ -1159,6 +1172,10 @@ function main:Begin(PROPS)
                 MenuBarPadding.Name = "MenuBarPadding"
                 MenuBarPadding.Parent = MenuBar
                 MenuBarPadding.PaddingLeft = UDim.new(0, 6)
+
+                MenuBarItem.MouseButton1Click:Connect(function()
+                    MenuBarItem_Items.Visible = Open
+                end)
 
                 MenuBarItem_Items_ItemMain.MouseButton1Click:Connect(function()
                     if not ItemProperties.OnClick then 
