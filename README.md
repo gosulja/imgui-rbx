@@ -42,6 +42,9 @@ Final Example
 | Plot Lines                | false | false      | none                 |
 | Menu Bar                  | false | false      | none                 |
 | Text Colored              | false | false      | none                 |
+| Mini Windows              | false | false      | none                 |
+| Drodown Lists             | false | false      | none                 |
+| Sections                  | false | false      | none                 |
 
 
 # Information 
