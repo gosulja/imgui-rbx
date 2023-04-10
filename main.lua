@@ -1040,7 +1040,7 @@ function main:Begin(PROPS)
         SinWaveGraph_ElementDisplayName.Parent = SinWaveGraph_Element
         SinWaveGraph_ElementDisplayName.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
         SinWaveGraph_ElementDisplayName.BackgroundTransparency = 1.000
-        SinWaveGraph_ElementDisplayName.Position = UDim2.new(0, (SinWaveGraph_ElementDisplay.Size.X + 15), 0, 20)
+        SinWaveGraph_ElementDisplayName.Position = UDim2.new(0, (SinWaveGraph_ElementDisplay.AbsoluteSize.X + 15), 0, 20)
         SinWaveGraph_ElementDisplayName.Size = UDim2.new(1, 0, 0, 20)
         SinWaveGraph_ElementDisplayName.FontFace = GetFont()
         SinWaveGraph_ElementDisplayName.Text = SinWaveGraphArgs.Name
