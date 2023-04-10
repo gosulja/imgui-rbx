@@ -42,7 +42,7 @@ Some info on themes: Themes will have different components and styles, for examp
 | Color Picker              | true  | true       | added logic, fixings |
 | Radio Toggles             | true  | true       | none                 |
 | Input Text                | true  | true       | none                 |
-| Plot Lines                | false | false      | none                 |
+| SinWaveGraph              | true  | semi       | returning bad value  |
 | Menu Bar                  | false | false      | none                 |
 | Text Colored              | false | false      | none                 |
 | Mini Windows              | false | false      | none                 |
