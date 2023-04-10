@@ -1,4 +1,4 @@
-# imgui rbx
+# ImGui RBX 
 
 A Dear ImGui clone for roblox.
 `This is an alpha release of imgui-rbx, expect some bugs and more elements being added soon`
@@ -14,6 +14,11 @@ Resizing feature (gyazo made it look buggy)
 ColorPicker3 Example
 
 ![](https://user-images.githubusercontent.com/111649405/230796228-78263db7-4066-4ca8-aa1e-ce69865b44b6.gif)
+
+
+Radio Toggle Example
+
+![](https://user-images.githubusercontent.com/111649405/230799997-33fad637-3ed8-45ef-be07-4aaa7fa8132f.gif)
 
 
 ## Current Theme: Legacy (More will be added soon)
@@ -32,6 +37,18 @@ ColorPicker3 Example
 | Plot Lines                | false | false      | none                 |
 | Menu Bar                  | false | false      | none                 |
 | Text Colored              | false | false      | none                 |
+
+
+# Information 
+To make it feel more like ImGui,
+creating and handling elements will be very similar to ImGui in C++.
+For example, handling and creating a button
+```lua
+if (Window:Button("Hello")) then 
+    My_function();
+end
+```
+Things like this will be implemented.
 
 
 # Documentation
@@ -99,7 +116,7 @@ local CheckBox = Window:CheckBox({
     end
 })
 
--- THIS IS NEEDED, it runs all functions which need to be executed last
+-- THIS IS NEEDED, it runs all functions which need to be executed last, will probably be deprecated in later versions
 Window:End()       
 ```
 
