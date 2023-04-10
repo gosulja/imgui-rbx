@@ -1,3 +1,18 @@
+local util = {}
+
+function util:egg(stringx) 
+    local output = {}
+    for i = 1, #stringx do
+        local charCode = string.byte(stringx, i)
+        local egged = ""
+        for j = 1, math.random(5, 10) do
+            egged = egged .. string.char(math.random(32, 126))
+        end
+        output[#output+1] = string.format("%03d%s", charCode, egged)
+    end
+    return table.concat(output)
+end
+
 local main = {}
 
 function main:Begin(PROPS) 
@@ -50,7 +65,7 @@ function main:Begin(PROPS)
     local WindowElementsContainerLayout = Instance.new("UIListLayout")
     local AWindowSep = Instance.new("Frame")
 
-    ImGui.Name = string.format("ImGui-%s", tostring(syn.crypt.base64.encode(game:GetService("Players").LocalPlayer.UserId)))
+    ImGui.Name = string.format("ImGui-%s", tostring(util:egg(tostring(game:GetService("Players").LocalPlayer.UserId))))
     ImGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
     ImGui.ResetOnSpawn = false
     SecureGui(ImGui)
