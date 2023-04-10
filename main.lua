@@ -246,7 +246,11 @@ function main:Begin(PROPS)
         Button_ElementPadding.PaddingLeft = UDim.new(0, 6)
         Button_ElementPadding.PaddingRight = UDim.new(0, 6)
 
-        Button_Element.MouseButton1Click:Connect(function() return true end)
+        Button_Element.Activated:Connect(function(inputObject, clickCount)
+            if inputObject.UserInputType.Name == "MouseButton1" then 
+                return true
+            end
+        end)
 
         function OnClick:Connect(Function) 
             Button_Element.MouseButton1Click:Connect(Function)
@@ -1081,6 +1085,90 @@ function main:Begin(PROPS)
         end
 
 
+    end
+
+    function ElementHandler:BeginMenuBar() 
+        local MenuBar = Instance.new("Frame")
+        local MenuBarLayout = Instance.new("UIListLayout")
+
+        MenuBar.Name = "MenuBar"
+        MenuBar.Parent = WindowElementContainer
+        MenuBar.BackgroundColor3 = Color3.fromRGB(44, 46, 48)
+        MenuBar.BorderColor3 = Color3.fromRGB(74, 74, 83)
+        MenuBar.Position = UDim2.new(-0.048780486, 0, 0.0417362265, 0)
+        MenuBar.Size = UDim2.new(1, 0, 0, 23)
+
+        MenuBarLayout.Name = "MenuBarLayout"
+        MenuBarLayout.Parent = MenuBar
+        MenuBarLayout.FillDirection = Enum.FillDirection.Horizontal
+        MenuBarLayout.SortOrder = Enum.SortOrder.LayoutOrder
+
+        function ElementHandler:BeginMenu(MenuName) 
+            local MenuBarItem = Instance.new("TextButton")
+
+            MenuBarItem.Name = MenuName
+            MenuBarItem.Parent = MenuBar
+            MenuBarItem.BackgroundColor3 = Color3.fromRGB(44, 46, 48)
+            MenuBarItem.BorderSizePixel = 0
+            MenuBarItem.Size = UDim2.new(-0.0895390064, 100, 1, 0)
+            MenuBarItem.FontFace = GetFont()
+            MenuBarItem.Text = MenuName
+            MenuBarItem.TextColor3 = Color3.fromRGB(255, 255, 255)
+            MenuBarItem.TextSize = 17.000
+
+            function ElementHandler:MenuItem(ItemProperties) 
+
+                local MenuBarItem_Items = Instance.new("Frame")
+                local MenuBarItem_Items_2 = Instance.new("UIListLayout")
+                local MenuBarItem_Items_ItemMain = Instance.new("TextButton")
+                local MenuBarItem_Items_ItemMainPadding = Instance.new("UIPadding")
+                local MenuBarItem_ItemsPadding = Instance.new("UIPadding")
+                local MenuBarPadding = Instance.new("UIPadding")
+
+                MenuBarItem_Items.Name = "MenuBarItem_Items"
+                MenuBarItem_Items.Parent = MenuBar:FindFirstChild(ItemProperties.Menu)
+                MenuBarItem_Items.BackgroundColor3 = Color3.fromRGB(25, 26, 27)
+                MenuBarItem_Items.BackgroundTransparency = 0.050
+                MenuBarItem_Items.BorderColor3 = Color3.fromRGB(74, 74, 83)
+                MenuBarItem_Items.Position = UDim2.new(0, 0, 1, 1)
+                MenuBarItem_Items.Size = UDim2.new(0, 100, 0, 23)
+
+                MenuBarItem_Items_2.Name = "MenuBarItem_Items"
+                MenuBarItem_Items_2.Parent = MenuBarItem_Items
+                MenuBarItem_Items_2.SortOrder = Enum.SortOrder.LayoutOrder
+
+                MenuBarItem_Items_ItemMain.Name = "MenuBarItem_Items_ItemMain"
+                MenuBarItem_Items_ItemMain.Parent = MenuBarItem_Items
+                MenuBarItem_Items_ItemMain.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+                MenuBarItem_Items_ItemMain.BackgroundTransparency = 1.000
+                MenuBarItem_Items_ItemMain.Size = UDim2.new(1, 0, 0, 20)
+                MenuBarItem_Items_ItemMain.FontFace = GetFont()
+                MenuBarItem_Items_ItemMain.Text = ItemProperties.Name
+                MenuBarItem_Items_ItemMain.TextColor3 = Color3.fromRGB(255, 255, 255)
+                MenuBarItem_Items_ItemMain.TextSize = 16.000
+                MenuBarItem_Items_ItemMain.TextXAlignment = Enum.TextXAlignment.Left
+
+                MenuBarItem_Items_ItemMainPadding.Name = "MenuBarItem_Items_ItemMainPadding"
+                MenuBarItem_Items_ItemMainPadding.Parent = MenuBarItem_Items_ItemMain
+                MenuBarItem_Items_ItemMainPadding.PaddingLeft = UDim.new(0, 5)
+
+                MenuBarItem_ItemsPadding.Name = "MenuBarItem_ItemsPadding"
+                MenuBarItem_ItemsPadding.Parent = MenuBarItem_Items
+                MenuBarItem_ItemsPadding.PaddingTop = UDim.new(0, 3)
+
+                MenuBarPadding.Name = "MenuBarPadding"
+                MenuBarPadding.Parent = MenuBar
+                MenuBarPadding.PaddingLeft = UDim.new(0, 6)
+
+                MenuBarItem_Items_ItemMain.MouseButton1Click:Connect(function()
+                    if not ItemProperties.OnClick then 
+                        return
+                    end
+
+                    pcall(ItemProperties.OnClick)
+                end)
+            end
+        end
     end
 
     local TweenService = game:GetService("TweenService")
