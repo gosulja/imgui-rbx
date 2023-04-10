@@ -1256,7 +1256,13 @@ function main:Begin(PROPS)
 
         UserInputService.InputBegan:Connect(function(input, gameProcessedEvent)
             if input.KeyCode.Name == "RightBracket" then
-                ImGui:Destroy()
+                if syn.protect_gui then
+                    syn.unprotect_gui(ImGui)
+                    ImGui:Destroy()
+                elseif gethui then
+                    ImGui.Parent = nil
+                    ImGui:Destroy()
+                end
             end
         end)
     end
