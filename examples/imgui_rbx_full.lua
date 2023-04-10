@@ -81,4 +81,13 @@ Window:RadioButtons({
 
 Window:Seperator();
 
+Window:SinWaveGraph({
+    Value = 10,
+    MaxHeight = 60,
+    Frequency = 1,
+    OnChanged = function(val) 
+        print(val)
+    end
+})
+
 Window:End()

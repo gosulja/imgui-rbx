@@ -1023,7 +1023,7 @@ function main:Begin(PROPS)
         local Animating = true
 
         SinWaveGraph_Element.Name = "SinWaveGraph_Element"
-        SinWaveGraph_Element.Parent = game.StarterGui.ImGui.Window.WindowElementContainer.WindowElements
+        SinWaveGraph_Element.Parent = WindowElements
         SinWaveGraph_Element.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
         SinWaveGraph_Element.BackgroundTransparency = 1.000
         SinWaveGraph_Element.Position = UDim2.new(0, 0, 0.689999998, 0)
