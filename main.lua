@@ -1025,7 +1025,7 @@ function main:Begin(PROPS)
 
         SinWaveGraph_ElementLayout.Name = "SinWaveGraph_ElementLayout"
         SinWaveGraph_ElementLayout.Parent = SinWaveGraph_Element
-        SinWaveGraph_ElementLayout.SortOrder = Enum.SortOrder.LayoutOrder
+        SinWaveGraph_ElementLayout.SortOrder = Enum.SortOrder.Name
         SinWaveGraph_ElementLayout.Padding = UDim.new(0, 10)
 
         SinWaveGraph_ElementDisplay.Name = "SinWaveGraph_ElementDisplay"
@@ -1036,7 +1036,7 @@ function main:Begin(PROPS)
         SinWaveGraph_ElementDisplay.Size = UDim2.new(0.370000005, 0, 0, 60)
         SinWaveGraph_ElementDisplay.ClipsDescendants = true
 
-        SinWaveGraph_ElementDisplayName.Name = "SinWaveGraph_ElementDisplayName"
+        SinWaveGraph_ElementDisplayName.Name = "ASinWaveGraph_ElementName"
         SinWaveGraph_ElementDisplayName.Parent = SinWaveGraph_Element
         SinWaveGraph_ElementDisplayName.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
         SinWaveGraph_ElementDisplayName.BackgroundTransparency = 1.000
