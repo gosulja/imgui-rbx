@@ -23,6 +23,11 @@ Radio Toggle Example
 ![](https://user-images.githubusercontent.com/111649405/230799997-33fad637-3ed8-45ef-be07-4aaa7fa8132f.gif)
 
 
+SinWaveGraph Example (Visualize your random values)
+
+![](https://user-images.githubusercontent.com/111649405/230933404-89e9836f-0717-4b03-87d9-d43922af44df.gif)
+
+
 Final Example
 
 ![](https://user-images.githubusercontent.com/111649405/230902091-64b606ad-ff28-4b1e-8021-7617dee9dab1.gif)
